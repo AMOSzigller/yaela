@@ -1,152 +1,75 @@
 <!DOCTYPE html>
-<html lang="he" dir="rtl">
+<html lang="he">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>מערכת יעלה - התחברות</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-color: #556B2F; /* Olive Drab */
-            --warning-yellow: #FFC107;
-            --text-color: #333;
-            --border-color: #ccc;
-        }
-
-        body {
-            font-family: 'Rubik', sans-serif;
-            background-color: #EAEAEA;
-            color: var(--text-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-            overflow: hidden;
-            position: relative;
-        }
-
-        /* Construction tape stripes */
-        body::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: repeating-linear-gradient(
-                -45deg,
-                var(--warning-yellow),
-                var(--warning-yellow) 25px,
-                #333 25px,
-                #333 50px
-            );
-            background-size: 200% 200%;
-            opacity: 0.1;
-            z-index: 1;
-        }
-
-        .login-container {
-            background-color: #fff;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            width: 100%;
-            max-width: 400px;
-            text-align: center;
-            position: relative;
-            z-index: 2;
-        }
-
-        .logo {
-            max-width: 120px;
-            margin-bottom: 20px;
-        }
-
-        .login-container h2 {
-            margin-bottom: 30px;
-            color: var(--primary-color);
-        }
-
-        .construction-banner {
-            background-color: var(--warning-yellow);
-            color: #333;
-            padding: 10px;
-            border-radius: 5px;
-            font-weight: bold;
-            margin-bottom: 20px;
-            border: 2px dashed #333;
-        }
-
-        .input-group {
-            margin-bottom: 20px;
-            text-align: right;
-        }
-
-        .input-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: 500;
-        }
-
-        .input-group input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid var(--border-color);
-            border-radius: 5px;
-            box-sizing: border-box;
-            font-family: 'Rubik', sans-serif;
-        }
-
-        .login-button {
-            width: 100%;
-            padding: 12px;
-            border: none;
-            border-radius: 5px;
-            background-color: var(--primary-color);
-            color: white;
-            font-size: 1.1em;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-
-        .login-button:hover {
-            background-color: #6B8E23; /* Darker Olive */
-        }
-        
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>מערכת יעלה - התחברות</title>
+  <style>
+    body {
+      font-family: "Assistant", sans-serif;
+      direction: rtl;
+      text-align: center;
+      padding: 20px;
+      background-color: #f0f4f5;
+      margin: 0;
+    }
+    #login-screen {
+      background-color: #e6edea;
+      border: 2px solid #4b5f52;
+      border-radius: 10px;
+      max-width: 350px;
+      margin: 40px auto;
+      padding: 30px 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    input {
+      margin: 10px 0;
+      padding: 10px;
+      width: 90%;
+      border: 1px solid #4b5f52;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #4b5f52;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background-color: #3a4b42;
+    }
+    .logo {
+      width: 80px;
+      margin-bottom: 20px;
+    }
+    @media (max-width: 480px) {
+      #login-screen {
+        width: 95%;
+        padding: 20px 10px;
+      }
+    }
+  </style>
 </head>
 <body>
+  <div id="login-screen">
+    <img src="logo.png" alt="לוגו מערכת יעלה" class="logo">
+    <h1>ברוכים הבאים</h1>
+    <p>מערכת יעלה לניהול גדודי</p>
+    <input type="text" id="username" placeholder="שם משתמש"><br>
+    <input type="password" id="password" placeholder="ססמא"><br>
+    <button onclick="fakeLogin()">התחבר</button>
+    <p id="error" style="color: red;"></p>
+  </div>
 
-    <div class="login-container">
-        <div class="construction-banner">
-            🚧 הפתיחה בקרוב 🚧
-        </div>
-        <img src="logo.png" alt="לוגו מערכת יעלה" class="logo">
-        <h2>ברוכים הבאים למערכת יעלה לניהול גדודי</h2>
-        <form id="login-form">
-            <div class="input-group">
-                <label for="username">שם משתמש</label>
-                <input type="text" id="username" name="username" required>
-            </div>
-            <div class="input-group">
-                <label for="password">סיסמה</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <button type="submit" class="login-button">התחברות</button>
-        </form>
-    </div>
-
-    <script>
-        document.getElementById('login-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            alert("האתר בבניה. לפרטים צור קשר עם השלישות.");
-        });
-    </script>
-
+  <script>
+    function fakeLogin() {
+      const error = document.getElementById("error");
+      error.textContent = "המערכת בבניה, לפרטים צור קשר עם השלישות";
+    }
+  </script>
 </body>
 </html>
-
