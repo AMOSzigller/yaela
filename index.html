@@ -2,33 +2,36 @@
 <html lang="he">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>מערכת יעלה - התחברות</title>
   <style>
     body {
       font-family: "Assistant", sans-serif;
       direction: rtl;
       text-align: center;
-      padding: 50px;
+      padding: 20px;
       background-color: #f0f4f5;
+      margin: 0;
     }
     #login-screen {
       background-color: #e6edea;
       border: 2px solid #4b5f52;
       border-radius: 10px;
-      width: 300px;
-      margin: 0 auto;
-      padding: 30px;
+      max-width: 350px;
+      margin: 40px auto;
+      padding: 30px 20px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
     .hidden {
       display: none;
     }
     input {
-      margin: 10px;
+      margin: 10px 0;
       padding: 10px;
       width: 90%;
       border: 1px solid #4b5f52;
       border-radius: 5px;
+      font-size: 16px;
     }
     button {
       padding: 10px 20px;
@@ -37,6 +40,7 @@
       border: none;
       border-radius: 5px;
       cursor: pointer;
+      font-size: 16px;
     }
     button:hover {
       background-color: #3a4b42;
@@ -49,8 +53,17 @@
       color: #007bff;
     }
     .logo {
-      width: 100px;
+      width: 80px;
       margin-bottom: 20px;
+    }
+    @media (max-width: 480px) {
+      #login-screen {
+        width: 95%;
+        padding: 20px 10px;
+      }
+      .menu a {
+        font-size: 16px;
+      }
     }
   </style>
 </head>
