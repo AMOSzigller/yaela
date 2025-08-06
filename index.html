@@ -1,106 +1,66 @@
 <!DOCTYPE html>
-<html lang="he" dir="rtl">
+<html lang="he">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>מערכת יעלה - פורטל כניסה</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-color: #556B2F; /* Olive Drab */
-            --secondary-color: #F5F5DC; /* Beige / Khaki */
-            --text-color: #333;
-        }
-        body {
-            font-family: 'Rubik', sans-serif;
-            text-align: center;
-            background-color: var(--secondary-color);
-            color: var(--text-color);
-            margin: 0;
-            padding: 20px;
-        }
-        .container {
-            max-width: 900px;
-            margin: 40px auto;
-        }
-        .logo {
-            max-width: 150px;
-            margin-bottom: 20px;
-        }
-        h1 {
-            color: var(--primary-color);
-            font-weight: 700;
-        }
-        .portal-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-top: 40px;
-        }
-        .portal-button {
-            background-color: #fff;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            padding: 30px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            text-decoration: none;
-            color: var(--text-color);
-            font-size: 1.3em;
-            font-weight: 500;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .portal-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-        .portal-button .icon {
-            font-size: 3.5em;
-            margin-bottom: 15px;
-            color: var(--primary-color);
-        }
-        footer {
-            margin-top: 50px;
-            font-size: 0.9em;
-            color: #777;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>מערכת יעלה - התחברות</title>
+  <style>
+    body { font-family: Arial, sans-serif; direction: rtl; text-align: center; padding: 50px; }
+    .hidden { display: none; }
+    input { margin: 10px; padding: 10px; width: 200px; }
+    button { padding: 10px 20px; }
+    .menu a { display: block; margin: 10px 0; font-size: 18px; text-decoration: none; color: #007bff; }
+  </style>
 </head>
 <body>
+  <div id="login-screen">
+    <h1>ברוכים הבאים למערכת יעלה, נא להזדהות</h1>
+    <input type="text" id="username" placeholder="שם משתמש"><br>
+    <input type="password" id="password" placeholder="ססמא"><br>
+    <button onclick="login()">התחבר</button>
+    <p id="error" style="color: red;"></p>
+  </div>
 
-    <div class="container">
-        <img src="https://i.postimg.cc/SKpdvS1y/a08d14cf-84af-43d1-8fd6-203d54777759.png" alt="לוגו מערכת יעלה" class="logo">
-        <h1>פורטל מערכת יעלה</h1>
-        <p>יש לבחור את העמדה הרלוונטית כדי להמשיך</p>
-
-        <div class="portal-grid">
-            <a href="הדבק כאן את הקישור לאפליקציית הקליטה" class="portal-button">
-                <span class="icon">📥</span>
-                <span>עמדת קליטה</span>
-            </a>
-            <a href="הדבק כאן את הקישור לאפליקציית המראיינים" class="portal-button">
-                <span class="icon">🧑‍⚖️</span>
-                <span>עמדת מראיין</span>
-            </a>
-            <a href="הדבק כאן את הקישור לאפליקציית השחרור" class="portal-button">
-                <span class="icon">✅</span>
-                <span>עמדת שחרור</span>
-            </a>
-            <a href="הדבק כאן את הקישור לדשבורד הפיקוד" class="portal-button">
-                <span class="icon">📊</span>
-                <span>דשבורד פיקוד</span>
-            </a>
-        </div>
-
-        <footer>
-            <p>מערכת יעלה | פותח לניהול ימי ראיונות</p>
-        </footer>
+  <div id="main-menu" class="hidden">
+    <h2>תפריט ראשי</h2>
+    <div class="menu">
+      <a href="https://script.google.com/macros/s/AKfycbwsAZOOY89UwrmEHzNOIwItAfYn9X3zF1-NsAqa5sat7OxdJEG0jfYvW0BEb-pMyXVX6A/exec?view=stats" target="_blank">אימון פלסם ספטמבר 2025</a>
+      <a href="#" onclick="showInterviewDays()">ימי ראיונות</a>
     </div>
+  </div>
 
+  <div id="interview-days" class="hidden">
+    <h2>ימי ראיונות</h2>
+    <div class="menu">
+      <a href="https://script.google.com/macros/s/AKfycbxYKPW9uA3GNadLdbNRjuWlfusbFlKNVBB3hBEX7xFFnV_lrHQOjR-odyn_DHKFbaYC/exec?page=dashboard" target="_blank">אילת אוגוסט 2025</a>
+      <a href="https://docs.google.com/spreadsheets/d/12Sg2uUS-sx0Z_B7yyFKqnRwlnMGNOubrf_B8eDAkaLQ/edit?usp=sharing" target="_blank">אילת יולי 2025</a>
+    </div>
+  </div>
+
+  <script>
+    const users = {
+      saar: 'Aa123456',
+      bar: 'Aa123456',
+      ben: 'Aa123456',
+      yana: 'Aa123456'
+    };
+
+    function login() {
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+      const error = document.getElementById("error");
+
+      if (users[username] && users[username] === password) {
+        document.getElementById("login-screen").classList.add("hidden");
+        document.getElementById("main-menu").classList.remove("hidden");
+      } else {
+        error.textContent = "אם אינך מצליח להתחבר אנא פנה לשלישות";
+      }
+    }
+
+    function showInterviewDays() {
+      document.getElementById("main-menu").classList.add("hidden");
+      document.getElementById("interview-days").classList.remove("hidden");
+    }
+  </script>
 </body>
 </html>
