@@ -122,7 +122,7 @@
     <div id="dashboard-wrapper">
         <div class="container">
             <img src="./logo.png" alt="לוגו מערכת יעלה" class="logo">
-            <h1 class="mb-2">יום ראיונות אילת  אוגוסט 2025</h1>
+            <h1 class="mb-2">יום ראיונות אילת - אוגוסט 2025</h1>
             <p id="welcome-message"></p> <p class="lead mb-5" id="lead-text">נא לבחור את העמדה הרצויה</p>
             
             <div class="row g-4 justify-content-center">
@@ -160,14 +160,14 @@
     </div>
 
     <script>
-        // --- הגדרת הרשאות, סיסמאות והודעות ---
         const allRoles = ['interviewer', 'checkin', 'release', 'shlishut', 'pikud'];
         
         const userRoles = {
             'mefaked': allRoles,
             'Shalishut': ['checkin', 'release'],
             'Interviewer': ['interviewer'],
-            'saar': allRoles,
+            'saar': ['interviewer', 'pikud'],
+            'yaniv': ['interviewer', 'pikud'],
             'Calaint': allRoles,
             'Lilach': allRoles,
             'ben': allRoles
@@ -175,6 +175,7 @@
 
         const specialMessages = {
             'saar': 'ברוך הבא סער שפירא, מפקד הפלסם!',
+            'yaniv': 'ברוך הבא, יניב! מפקד פלוגת אילת',
             'Calaint': 'ברוכה הבאה, כלנית!',
             'Lilach': 'ברוכה הבאה, לילך!',
             'ben': 'ברוך הבא, בן! שליש גדוד 1895'
@@ -236,4 +237,3 @@
     </script>
 </body>
 </html>
-
