@@ -159,146 +159,87 @@
         </div>
     </div>
 
-    
-<script>
-  // === URL של ה-Web App שלך (Apps Script) ===
-  const API = 'https://script.google.com/macros/s/AKfycbzF_HE-JJvBon3uAZ0o44xyWDUKagQXCfJKlAvap4E3se2LjbOofYdMpD-xXuEUPdMdWw/exec';
+    <script>
+        const allRoles = ['interviewer', 'checkin', 'release', 'shlishut', 'pikud'];
+        
+        const userRoles = {
+            'mefaked': allRoles,
+            'Shalishut': ['checkin', 'release'],
+            'Interviewer': ['interviewer'],
+            'saar': ['interviewer', 'pikud'],
+            'yaniv': ['interviewer', 'pikud'],
+            'Calanit': allRoles,
+            'Lilach': allRoles,
+            'ben': allRoles,
+            'Sarit': allRoles,
+            'Avi': ['shlishut', 'pikud'],
+            'Julia': allRoles
+        };
 
-  const allCards = ['interviewer','checkin','release','shlishut','pikud'];
+        const specialMessages = {
+            'saar': 'ברוך הבא סער שפירא, מפקד הפלסם!',
+            'yaniv': 'ברוך הבא, יניב! מפקד פלוגת אילת',
+            'Calanit': 'ברוכה הבאה, כלנית!',
+            'Lilach': 'ברוכה הבאה, לילך!',
+            'ben': 'ברוך הבא, בן! שליש גדוד 1895',
+            'Sarit': 'ברוכה הבאה, שרית אוסטרובסקי!',
+            'Avi': 'ברוך הבא, אבי הררי!',
+            'Julia': 'ברוכה הבאה, ג\'וליה!'
+        };
 
-  // מיפוי 'תפקיד' -> אילו כרטיסיות להציג
-  // עדכן כאן את המפתחות לפי הערכים בעמודת "role" בגיליון Users
-  const ROLE_TO_CARDS = {
-    'אדמין':        allCards,
-    'admin':        allCards,
-    'מראיין':       ['interviewer'],
-    'interviewer':  ['interviewer'],
-    'קליטה':        ['checkin'],
-    'checkin':      ['checkin'],
-    'שחרור':        ['release'],
-    'release':      ['release'],
-    'שלישות':       ['checkin','release'], // כמו שהיה אצלך
-    'shalishut':    ['checkin','release'],
-    'פיקוד':        ['pikud'],
-    'pikud':        ['pikud']
-  };
+        const cardMapping = {
+            'interviewer': 'card-interviewer',
+            'checkin': 'card-checkin',
+            'release': 'card-release',
+            'shlishut': 'card-shlishut',
+            'pikud': 'card-pikud'
+        };
 
-  const $ = (id) => document.getElementById(id);
+        document.getElementById('login-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const passwordInput = document.getElementById('password');
+            const password = passwordInput.value;
+            const errorMessage = document.getElementById('error-message');
+            
+            if (userRoles[password]) {
+                if (specialMessages[password]) {
+                    document.getElementById('welcome-message').innerText = specialMessages[password];
+                    document.getElementById('lead-text').style.display = 'none';
+                }
 
-  function hideAllCards() {
-    ['card-interviewer','card-checkin','card-release','card-shlishut','card-pikud']
-      .forEach(id => { const el = $(id); if (el) el.style.display = 'none'; });
-  }
+                const roles = userRoles[password];
+                roles.forEach(role => {
+                    const cardId = cardMapping[role];
+                    if (cardId) {
+                        document.getElementById(cardId).style.display = 'block';
+                    }
+                });
 
-  function showCardsForRole(role) {
-    hideAllCards();
-    const key = (role || '').toString().trim();
-    const allowed = ROLE_TO_CARDS[key] || [];
-    allowed.forEach(k => { const el = $('card-' + k); if (el) el.style.display = 'block'; });
-  }
+                const loginContainer = document.getElementById('login-container');
+                const dashboardWrapper = document.getElementById('dashboard-wrapper');
+                loginContainer.style.opacity = '0';
+                
+                setTimeout(() => {
+                    loginContainer.style.display = 'none';
+                    dashboardWrapper.style.display = 'block';
+                    setTimeout(() => {
+                        dashboardWrapper.style.opacity = '1';
+                    }, 20);
+                }, 500);
 
-  async function apiLogin(password) {
-    const r = await fetch(API, {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ action: 'login', password })
-    });
-    return r.json();
-  }
+            } else {
+                errorMessage.style.display = 'block';
+                passwordInput.classList.add('is-invalid');
+            }
+        });
 
-  async function apiWhoAmI(token) {
-    const url = new URL(API);
-    url.searchParams.set('action','whoami');
-    url.searchParams.set('token', token);
-    const r = await fetch(url.toString(), { method: 'GET' });
-    return r.json();
-  }
-
-  // התחברות מהטופס
-  const form = document.getElementById('login-form');
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const passwordInput = $('password');
-    const errorMessage  = $('error-message');
-    errorMessage.style.display = 'none';
-    passwordInput.classList.remove('is-invalid');
-
-    const pw = (passwordInput.value || '').trim();
-    if (!pw) {
-      errorMessage.style.display = 'block';
-      passwordInput.classList.add('is-invalid');
-      return;
-    }
-
-    try {
-      const res = await apiLogin(pw);
-      if (!res.ok) {
-        errorMessage.style.display = 'block';
-        passwordInput.classList.add('is-invalid');
-        return;
-      }
-
-      // שומרים טוקן סשן לזמן קצר
-      sessionStorage.setItem('token', res.token);
-
-      // הודעת ברוך-הבא לפי מגדר+תפקיד מהשרת
-      const welcomeEl = $('welcome-message');
-      if (welcomeEl) welcomeEl.textContent = res.welcome || '';
-
-      // הצגת כרטיסיות לפי התפקיד
-      showCardsForRole(res.user && res.user.role);
-
-      // מעבר למסך הדשבורד
-      const loginContainer   = $('login-container');
-      const dashboardWrapper = $('dashboard-wrapper');
-      if (loginContainer && dashboardWrapper) {
-        loginContainer.style.opacity = '0';
-        setTimeout(() => {
-          loginContainer.style.display = 'none';
-          dashboardWrapper.style.display = 'block';
-          setTimeout(() => { dashboardWrapper.style.opacity = '1'; }, 20);
-        }, 500);
-      }
-
-      passwordInput.value = '';
-
-    } catch (err) {
-      console.error(err);
-      errorMessage.style.display = 'block';
-      passwordInput.classList.add('is-invalid');
-    }
-  });
-
-  // ניקוי הודעת שגיאה בזמן הקלדה
-  $('password').addEventListener('input', function() {
-    if (this.classList.contains('is-invalid')) {
-      this.classList.remove('is-invalid');
-      $('error-message').style.display = 'none';
-    }
-  });
-
-  // ניסיון שחזור סשן קיים
-  (async function boot() {
-    const token = sessionStorage.getItem('token');
-    if (!token) return;
-    try {
-      const j = await apiWhoAmI(token);
-      if (j && j.ok && j.authenticated) {
-        const welcomeEl = $('welcome-message');
-        if (welcomeEl) welcomeEl.textContent = j.welcome || '';
-        showCardsForRole(j.user && j.user.role);
-        const loginContainer   = $('login-container');
-        const dashboardWrapper = $('dashboard-wrapper');
-        if (loginContainer && dashboardWrapper) {
-          loginContainer.style.display = 'none';
-          dashboardWrapper.style.display = 'block';
-          dashboardWrapper.style.opacity = '1';
-        }
-      } else {
-        sessionStorage.removeItem('token');
-      }
-    } catch (_e) {}
-  })();
-</script>
+        document.getElementById('password').addEventListener('input', function() {
+            if (this.classList.contains('is-invalid')) {
+                this.classList.remove('is-invalid');
+                document.getElementById('error-message').style.display = 'none';
+            }
+        });
+    </script>
 </body>
 </html>
