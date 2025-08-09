@@ -118,11 +118,9 @@
 </head>
 <body>
 
-    <!-- שכבת הווידאו (ספלש) -->
     <div id="intro-overlay" aria-hidden="true">
         <button id="skip-btn" class="btn btn-light btn-sm">דלג</button>
         <video id="introVideo" playsinline muted preload="auto">
-            <!-- שים את הקבצים ברוט של הריפו -->
             <source src="./intro.webm" type="video/webm">
             <source src="./intro.mp4" type="video/mp4">
             הדפדפן שלך אינו תומך בוידאו HTML5.
@@ -154,7 +152,7 @@
     <div id="dashboard-wrapper">
         <div class="container">
             <img src="./logo.png" alt="לוגו מערכת יעלה" class="logo">
-            <h1 class="mb-2">יום ראיונות אילת  אוגוסט 2025</h1>
+            <h1 class="mb-2">יום ראיונות אילת - אוגוסט 2025</h1>
             <p id="welcome-message"></p> <p class="lead mb-5" id="lead-text">נא לבחור את העמדה הרצויה</p>
 
             <div class="row g-4 justify-content-center">
@@ -187,6 +185,18 @@
                         <div class="card-style dashboard-card"><h5>דשבורד פיקוד</h5></div>
                     </a>
                 </div>
+
+                <div class="col-lg-4 col-md-6 dashboard-card-wrapper" id="card-latecomers">
+                    <a href="https://script.google.com/macros/s/AKfycbwrxyD9b1k-N42rOS9WlxBMiQvqtQw1bTfsvXMtXTMmJjj-fHfFLdsD_b9vOi5XZoOY9Q/exec?page=latecomers" target="_blank" class="card-link">
+                        <div class="card-style dashboard-card"><h5>דוח מאחרים</h5></div>
+                    </a>
+                </div>
+
+                <div class="col-lg-4 col-md-6 dashboard-card-wrapper" id="card-locator">
+                    <a href="https://script.google.com/macros/s/AKfycbwrxyD9b1k-N42rOS9WlxBMiQvqtQw1bTfsvXMtXTMmJjj-fHfFLdsD_b9vOi5XZoOY9Q/exec" target="_blank" class="card-link">
+                        <div class="card-style dashboard-card"><h5>איתור מועמד</h5></div>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -196,16 +206,16 @@
 
         const userRoles = {
             'mefaked': allRoles,
-            'Shalishut': ['checkin', 'release'],
+            'Shalishut': ['checkin', 'release', 'latecomers', 'locator'],
             'Interviewer': ['interviewer'],
             'saar': ['interviewer', 'pikud'],
             'yaniv': ['interviewer', 'pikud'],
-            'Calanit': allRoles,
-            'Lilach': allRoles,
-            'ben': allRoles,
-            'Sarit': allRoles,
+            'Calanit': [...allRoles, 'latecomers'],
+            'Lilach': [...allRoles, 'latecomers'],
+            'ben': [...allRoles, 'latecomers', 'locator'],
+            'Sarit': [...allRoles, 'latecomers', 'locator'],
             'Avi': ['shlishut', 'pikud'],
-            'Julia': allRoles
+            'Julia': [...allRoles, 'latecomers']
         };
 
         const specialMessages = {
@@ -224,7 +234,9 @@
             'checkin': 'card-checkin',
             'release': 'card-release',
             'shlishut': 'card-shlishut',
-            'pikud': 'card-pikud'
+            'pikud': 'card-pikud',
+            'latecomers': 'card-latecomers',
+            'locator': 'card-locator'
         };
 
         const loginContainer = document.getElementById('login-container');
@@ -306,4 +318,3 @@
     </script>
 </body>
 </html>
-
