@@ -114,6 +114,21 @@
             left: 16px;
             z-index: 10000;
         }
+        
+        /* === NEW: סגנון לכרטיסיות מנוטרלות === */
+        .disabled-card a {
+            cursor: not-allowed;
+        }
+        .disabled-card .dashboard-card {
+            opacity: 0.6;
+            background-color: #f8f9fa;
+            filter: grayscale(80%);
+            transition: none;
+        }
+        .disabled-card .dashboard-card:hover {
+            transform: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
     </style>
 </head>
 <body>
@@ -202,28 +217,26 @@
     </div>
 
     <script>
-        const allRoles = ['interviewer', 'checkin', 'release', 'shlishut', 'pikud'];
+        const allPermissions = ['interviewer', 'checkin', 'release', 'shlishut', 'pikud', 'latecomers', 'locator'];
 
         const userRoles = {
-            'mefaked': allRoles,
-            'Shalishut': ['checkin', 'release', 'latecomers', 'locator'],
-            'Interviewer': ['interviewer'],
-            'saar': ['interviewer', 'pikud'],
-            'yaniv': ['interviewer', 'pikud'],
-            'Calanit': [...allRoles, 'latecomers'],
-            'Lilach': [...allRoles, 'latecomers'],
-            'ben': [...allRoles, 'latecomers', 'locator'],
-            'Sarit': [...allRoles, 'latecomers', 'locator'],
-            'Avi': ['shlishut', 'pikud'],
-            'Julia': [...allRoles, 'latecomers']
+            'Shalishut': ['checkin', 'release', 'shlishut', 'latecomers', 'locator'],
+            'Saar': ['interviewer', 'pikud'],
+            'Yaniv': ['interviewer', 'pikud'],
+            'Calanit': ['pikud', 'shlishut', 'latecomers'],
+            'Lilach': ['pikud', 'shlishut', 'latecomers', 'locator'],
+            'Ben': allPermissions,
+            'Sarit': allPermissions,
+            'Avi': ['shlishut', 'pikud', 'locator', 'latecomers'],
+            'Julia': allPermissions
         };
 
         const specialMessages = {
-            'saar': 'ברוך הבא סער שפירא, מפקד הפלסם!',
-            'yaniv': 'ברוך הבא, יניב! מפקד פלוגת אילת',
+            'Saar': 'ברוך הבא סער שפירא, מפקד הפלסם!',
+            'Yaniv': 'ברוך הבא, יניב! מפקד פלוגת אילת',
             'Calanit': 'ברוכה הבאה, כלנית!',
             'Lilach': 'ברוכה הבאה, לילך!',
-            'ben': 'ברוך הבא, בן! שליש גדוד 1895',
+            'Ben': 'ברוך הבא, בן! שליש גדוד 1895',
             'Sarit': 'ברוכה הבאה, שרית אוסטרובסקי!',
             'Avi': 'ברוך הבא, אבי הררי!',
             'Julia': 'ברוכה הבאה, ג\'וליה!'
@@ -259,13 +272,11 @@
             let safetyTimer = setTimeout(showDashboard, 3000);
 
             introOverlay.style.display = 'flex';
-            // ננסה להפעיל (בדפדפנים מסוימים יש צורך בקריאת play() יזומה)
             const playPromise = introVideo.play();
             if (playPromise && typeof playPromise.then === 'function') {
                 playPromise.then(() => {
                     clearTimeout(safetyTimer);
                 }).catch(() => {
-                    // אם נכשל autoplay (לא אמור לקרות כי הווידאו מושתק), נעבור ישר
                     clearTimeout(safetyTimer);
                     showDashboard();
                 });
@@ -283,23 +294,55 @@
             const errorMessage = document.getElementById('error-message');
 
             if (userRoles[password]) {
-                // הודעות ברוכים הבאים + פילטור כרטיסיות
+                // הודעת ברוכים הבאים
                 if (specialMessages[password]) {
                     document.getElementById('welcome-message').innerText = specialMessages[password];
                     document.getElementById('lead-text').style.display = 'none';
                 }
-                const roles = userRoles[password];
-                roles.forEach(role => {
+
+                // --- NEW LOGIC ---
+                const allRoleKeys = Object.keys(cardMapping);
+                const userPermittedRoles = userRoles[password];
+                const cardsContainer = document.querySelector('#dashboard-wrapper .row');
+                const allCardElements = Array.from(cardsContainer.querySelectorAll('.dashboard-card-wrapper'));
+                cardsContainer.innerHTML = ''; 
+
+                const permittedElements = [];
+                const disabledElements = [];
+
+                allRoleKeys.forEach(role => {
                     const cardId = cardMapping[role];
-                    if (cardId) {
-                        document.getElementById(cardId).style.display = 'block';
+                    const cardElement = allCardElements.find(el => el.id === cardId);
+                    if (!cardElement) return;
+
+                    cardElement.style.display = 'block'; // הצג את כל הכרטיסיות
+
+                    if (userPermittedRoles.includes(role)) {
+                        // הרשאה קיימת
+                        cardElement.classList.remove('disabled-card');
+                        permittedElements.push(cardElement);
+                    } else {
+                        // אין הרשאה
+                        cardElement.classList.add('disabled-card');
+                        const link = cardElement.querySelector('a');
+                        if(link) {
+                            link.onclick = (e) => {
+                                e.preventDefault();
+                                alert("אין לך הרשאה לפעולה זו. לקבלת הרשאה, יש לפנות אל השלישות של גדוד 1895.");
+                            };
+                        }
+                        disabledElements.push(cardElement);
                     }
                 });
+                
+                // הוסף את הכרטיסיות בחזרה לסדר הנכון
+                permittedElements.forEach(el => cardsContainer.appendChild(el));
+                disabledElements.forEach(el => cardsContainer.appendChild(el));
+                // --- END OF NEW LOGIC ---
 
                 // האנימציה של דהייה למסך הכניסה
                 loginContainer.style.opacity = '0';
                 setTimeout(() => {
-                    // במקום להציג את הדשבורד מיד – נציג קודם את הווידאו
                     playIntroThenShowDashboard();
                 }, 500);
 
