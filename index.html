@@ -1,83 +1,102 @@
 <!DOCTYPE html>
-<html lang="he">
+<html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YAE.LA</title>
+    <title>מאמת גישה...</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
-
-
+        /* --- עיצוב כללי --- */
         body {
-            background-color: #000000;
-            color: #A0522D; /* חום מדברי (Sienna) */
-            font-family: 'VT323', monospace;
-            text-shadow: 0 0 5px #A0522D, 0 0 10px #A0522D;
+            font-family: Arial, sans-serif;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            height: 100vh;
+            justify-content: center;
+            height: 100vh; /* גובה מסך מלא */
             margin: 0;
-            overflow: hidden;
+            background-color: #212529; /* רקע שחור-אפור כהה */
+        }
+
+        /* --- עיצוב הקופסה --- */
+        #loading-container {
             text-align: center;
+            background-color: #343A40; /* רקע אפור מעט יותר בהיר */
+            padding: 40px;
+            border-radius: 8px;
+            border: 1px solid #495057; /* מסגרת עדינה */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 400px;
         }
 
-
-        .main-title {
-            font-size: 10vw;
-            letter-spacing: 15px;
-            margin: 0;
-            padding: 0;
-            animation: flicker 1.5s infinite alternate;
+        /* --- עיצוב הלוגו --- */
+        #logo {
+            max-width: 120px;
+            height: auto;
+            margin-bottom: 25px;
+            filter: grayscale(30%) sepia(20%); /* פילטר קל לתת תחושה ישנה יותר */
         }
 
-
-        .coming-soon {
-            font-size: 4vw;
-            letter-spacing: 8px;
-            margin-top: 20px;
-            animation: fadeIn 3s ease-in;
-        }
-
-
-        .coming-soon::after {
-            content: '_';
-            animation: blink 1s step-end infinite;
-        }
-
-
-        /* אנימציות */
-        @keyframes flicker {
-            0%, 100% {
-                opacity: 1;
-                text-shadow: 0 0 8px #A0522D, 0 0 15px #A0522D;
-            }
-            50% {
-                opacity: 0.8;
-                text-shadow: 0 0 5px #A0522D;
-            }
-        }
-
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-
-        @keyframes blink {
-            from, to { opacity: 1; }
-            50% { opacity: 0; }
+        /* --- עיצוב הטקסט המשתנה --- */
+        #loading-text {
+            font-size: 1.1em;
+            color: #ced4da; /* צבע טקסט חאקי-אפרפר בהיר */
+            height: 25px; /* גובה קבוע למניעת קפיצות */
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
     </style>
 </head>
 <body>
 
+    <div id="loading-container">
+        <img id="logo" src="logo.png" alt="לוגו">
+        <p id="loading-text"></p>
+    </div>
 
-    <h1 class="main-title">YAE.LA</h1>
-    <h2 class="coming-soon">COMING SOON</h2>
+    <script>
+        // --- הגדרות שניתן לשנות ---
 
+        // 1. רשימת ההודעות שיוצגו, לפי הסדר
+        const messages = [
+            "מאמת את זהותך...",
+            "מוודא הרשאות...",
+            "מקבל אישור מהשרת הראשי...",
+            "כמעט שם..."
+        ];
+
+        // 2. כמה זמן (באלפיות השנייה) לחכות בין כל הודעה
+        const delay = 1500; // 1500 = שנייה וחצי
+
+        // 3. הכתובת הסופית אליה המשתמש יועבר
+        const destinationUrl = "https://script.google.com/macros/s/AKfycbysdSWEY8LScTaQ0Ex463WSR4HHjPl2kxQnL3QAQRsQStXmOlyMo4xS1eDonRJA4RHq/exec";
+
+        // --- הלוגיקה (אין צורך לגעת מכאן והלאה) ---
+
+        const loadingTextElement = document.getElementById("loading-text");
+        let messageIndex = 0;
+
+        // פונקציה שמחליפה את ההודעה
+        function updateLoadingMessage() {
+            // בודקת אם נשארו עוד הודעות להציג
+            if (messageIndex < messages.length) {
+                // מציגה את ההודעה הבאה
+                loadingTextElement.innerText = messages[messageIndex];
+                // מקדמת את המונה להודעה הבאה
+                messageIndex++;
+                // מפעילה טיימר כדי לקרוא לעצמה שוב אחרי העיכוב שהוגדר
+                setTimeout(updateLoadingMessage, delay);
+            } else {
+                // אם כל ההודעות הוצגו, בצע את ההעברה
+                loadingTextElement.innerText = "ההעברה מתבצעת כעת...";
+                window.location.href = destinationUrl;
+            }
+        }
+
+        // קריאה ראשונה לפונקציה כדי להתחיל את התהליך
+        updateLoadingMessage();
+    </script>
 
 </body>
 </html>
