@@ -1,17 +1,142 @@
-<!doctype html>
-<html lang="he">
-  <head>
-    <meta charset="utf-8" />
-    <title>אימון פלסם ספטמבר 2025</title>
-    <link rel="canonical" href="https://script.google.com/macros/s/AKfycbwsAZOOY89UwrmEHzNOIwItAfYn9X3zF1-NsAqa5sat7OxdJEG0jfYvW0BEb-pMyXVX6A/exec?view=dashboard">
-    <meta http-equiv="refresh" content="0; url=https://script.google.com/macros/s/AKfycbwsAZOOY89UwrmEHzNOIwItAfYn9X3zF1-NsAqa5sat7OxdJEG0jfYvW0BEb-pMyXVX6A/exec?view=dashboard">
-    <script>
-      // גיבוי אם meta refresh חסום
-      location.replace("https://script.google.com/macros/s/AKfycbwsAZOOY89UwrmEHzNOIwItAfYn9X3zF1-NsAqa5sat7OxdJEG0jfYvW0BEb-pMyXVX6A/exec?view=dashboard");
-    </script>
-  </head>
-  <body>
-    מעביר אותך… אם לא עבר אוטומטית,
-    <a href="https://script.google.com/macros/s/AKfycbwsAZOOY89UwrmEHzNOIwItAfYn9X3zF1-NsAqa5sat7OxdJEG0jfYvW0BEb-pMyXVX6A/exec?view=dashboard">לחץ כאן</a>.
-  </body>
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>אימון פלסם ספטמבר 2025</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="logo.png">
+  <meta property="og:image" content="logo.png">
+  <style>
+    :root {
+      --primary-color: #556B2F; /* olive-drab (מהקובץ המצורף) */
+      --secondary-color: #F5F5DC; /* beige */
+      --text-color: #333;
+      --card-bg-color: #FFFFFF;
+      --border-color: #DEE2E6;
+      --font-family: 'Rubik', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
+    }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      background: var(--secondary-color);
+      color: var(--text-color);
+      font-family: var(--font-family);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+    .wrap {
+      width: 100%;
+      max-width: 980px;
+    }
+    header { text-align: center; margin-bottom: 28px; }
+    header h1 { margin: 0; color: var(--primary-color); font-weight: 700; font-size: clamp(1.6rem, 2.4vw, 2.2rem); }
+    header p { margin: 8px 0 0; opacity: .8; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+    }
+
+    a.link-card {
+      position: relative;
+      display: block;
+      padding: 18px 20px;
+      background: var(--card-bg-color);
+      color: var(--text-color);
+      text-decoration: none;
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      box-shadow: 0 1px 0 rgba(0,0,0,.03);
+      transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+      outline: none;
+    }
+    a.link-card::before { /* פס צבעוני קטן משמאל */
+      content: "";
+      position: absolute;
+      inset-inline-start: 0; /* RTL/לוקלי */
+      top: 0; bottom: 0;
+      width: 6px;
+      border-top-left-radius: 14px;
+      border-bottom-left-radius: 14px;
+      background: var(--primary-color);
+      opacity: .9;
+    }
+    a.link-card:hover,
+    a.link-card:focus-visible {
+      transform: translateY(-2px);
+      border-color: rgba(85,107,47,.45);
+      box-shadow: 0 6px 18px rgba(0,0,0,.08);
+    }
+
+    .title { font-weight: 700; font-size: 1.05rem; color: var(--primary-color); }
+    .desc { margin-top: 6px; font-size: .95rem; opacity: .85; }
+
+    .launch {
+      margin-top: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: .5ch;
+      padding: 10px 14px;
+      background: var(--primary-color);
+      color: #fff;
+      border: 1px solid var(--primary-color);
+      border-radius: 999px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: filter .15s ease;
+    }
+    .launch:hover { filter: brightness(1.08); }
+    .launch:focus-visible { outline: 3px solid rgba(85,107,47,.35); outline-offset: 2px; }
+
+    footer { margin-top: 28px; text-align: center; font-size: .9rem; opacity: .75; }
+
+    /* Brand header */
+    .brand { display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; }
+    .brand img { width: 56px; height: 56px; object-fit: contain; border-radius: 10px; border: 1px solid var(--border-color); background: #fff; padding: 6px; box-shadow: 0 1px 0 rgba(0,0,0,.04); }
+    .brand h1 { margin: 0; color: var(--primary-color); font-weight: 700; font-size: clamp(1.6rem, 2.4vw, 2.2rem); }
+    .brand-sub { margin: 8px 0 0; opacity: .8; text-align: center; }
+  </style>
+</head>
+<body>
+  <main class="wrap" role="main">
+    <header>
+      <div class="brand" role="banner">
+        <img src="logo.png" alt="לוגו היחידה" onerror="this.style.display='none'">
+        <h1>אימון פלסם ספטמבר 2025</h1>
+      </div>
+      <p class="brand-sub">עמוד קישורים מהירים לניהול האימון.</p>
+    </header>
+
+    <section class="grid" aria-label="קישורים">
+      <a class="link-card" href="https://script.google.com/macros/s/AKfycbwsAZOOY89UwrmEHzNOIwItAfYn9X3zF1-NsAqa5sat7OxdJEG0jfYvW0BEb-pMyXVX6A/exec?view=dashboard" target="_blank" rel="noopener noreferrer" aria-label="צפי הגעה לאימון">
+        <div class="title">צפי הגעה לאימון</div>
+        <div class="desc">בחלוקה לפי מפקדים ומחלקות</div>
+        <span class="launch" role="button" aria-hidden="true">פתח ▸</span>
+      </a>
+
+      <a class="link-card" href="https://script.google.com/macros/s/AKfycbwsAZOOY89UwrmEHzNOIwItAfYn9X3zF1-NsAqa5sat7OxdJEG0jfYvW0BEb-pMyXVX6A/exec?view=shalishut" target="_blank" rel="noopener noreferrer" aria-label="שיחות שלישות">
+        <div class="title">שיחות שלישות</div>
+        <div class="desc">ניהול ומעקב אחרי שיחות שלישות שנשארו</div>
+        <span class="launch" role="button" aria-hidden="true">פתח ▸</span>
+      </a>
+
+      <a class="link-card" href="https://script.google.com/macros/s/AKfycbwsAZOOY89UwrmEHzNOIwItAfYn9X3zF1-NsAqa5sat7OxdJEG0jfYvW0BEb-pMyXVX6A/exec?view=stats" target="_blank" rel="noopener noreferrer" aria-label="דשבורד מפקד פלסם">
+        <div class="title">דשבורד מפקד פלסם</div>
+        <div class="desc">מספרים מרכזיים, פערים ושיחות מפקד שנותרו</div>
+        <span class="launch" role="button" aria-hidden="true">פתח ▸</span>
+      </a>
+    </section>
+
+    <footer>
+      לשאלות או בעיות אנא פנו אל שלישות גדוד 1895
+    </footer>
+  </main>
+</body>
 </html>
