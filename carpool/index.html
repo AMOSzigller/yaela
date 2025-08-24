@@ -1,121 +1,45 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>מערכת הקארפול – גדוד 1895</title>
-
-  <!-- Fallback redirect אם JS כבוי (אחרי 10 שניות) -->
-  <meta http-equiv="refresh" content="10;url=https://script.google.com/macros/s/AKfycbx65qrev8oWu80umaetBTyaYf0GAWjS1DRxEodhsPcPtqeR5JdeVBjSBDlJgXc2k4mB/exec">
-
-  <!-- עיצוב וגופנים -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/png" href="logo.png">
-  <meta property="og:image" content="logo.png">
-
   <style>
-    :root{
-      --primary-color:#556B2F; /* olive-drab */
-      --secondary-color:#F5F5DC; /* beige */
-      --text-color:#333;
-      --card-bg:#fff;
-      --border:#DEE2E6;
-      --font:'Rubik',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji",sans-serif;
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    html,body{height:100%}
-    body{
-      margin:0;background:var(--secondary-color);color:var(--text-color);
-      font-family:var(--font);
-      display:grid;place-items:center;padding:24px;
+    video {
+      max-width: 100%;
+      max-height: 100%;
     }
-    .wrap{width:100%;max-width:880px}
-    header{margin-bottom:20px;text-align:center}
-    .brand{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}
-    .brand img{width:56px;height:56px;object-fit:contain;border-radius:10px;border:1px solid var(--border);background:#fff;padding:6px;box-shadow:0 1px 0 rgba(0,0,0,.04)}
-    .brand h1{margin:0;color:var(--primary-color);font-weight:700;font-size:clamp(1.5rem,2.2vw,2rem)}
-    .card{
-      background:var(--card-bg);border:1px solid var(--border);border-radius:16px;
-      padding:22px;box-shadow:0 1px 0 rgba(0,0,0,.03)
-    }
-    .lead{margin:0 0 10px 0;font-size:1.15rem;color:var(--primary-color);font-weight:700}
-    .desc{margin:8px 0 0 0;opacity:.9;line-height:1.65}
-    ul{margin:8px 0 0 1rem;padding:0}
-    li{margin:4px 0}
-    .muted{opacity:.75}
-    .row{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:14px}
-    .btn{
-      display:inline-flex;align-items:center;gap:.5ch;
-      padding:10px 14px;border-radius:999px;text-decoration:none;
-      background:var(--primary-color);color:#fff;border:1px solid var(--primary-color);
-      font-weight:700;transition:filter .15s ease
-    }
-    .btn:hover{filter:brightness(1.07)}
-    .spinner{
-      width:28px;height:28px;border-radius:50%;
-      border:3px solid rgba(85,107,47,.2);border-top-color:var(--primary-color);
-      animation:spin 1s linear infinite
-    }
-    @keyframes spin{to{transform:rotate(360deg)}}
-    footer{margin-top:18px;text-align:center;font-size:.95rem;opacity:.8}
-    .hint{font-size:.9rem;margin-top:6px}
   </style>
 </head>
 <body>
-  <main class="wrap" role="main">
-    <header role="banner" class="brand">
-      <img src="logo.png" alt="לוגו גדוד 1895" onerror="this.style.display='none'">
-      <h1>מעבירים אותך למערכת הקארפול של גדוד 1895…</h1>
-    </header>
-
-    <section class="card" aria-live="polite">
-      <p class="lead">רגע סבלנות — מבצעים הפניה מאובטחת.</p>
-      <p class="desc">
-        במערכת הקארפול תוכל/י:
-      </p>
-      <ul>
-        <li>להציע טרמפ</li>
-        <li>להצטרף לטרמפ</li>
-        <li>לעקוב אחרי הטרמפים שלי</li>
-      </ul>
-      <p class="desc"><strong>ההזדהות</strong> מתבצעת באמצעות <strong>מספר טלפון</strong>.</p>
-
-      <div class="row">
-        <div class="spinner" role="status" aria-label="טוען…"></div>
-        <a class="btn" id="fallbackLink" href="https://script.google.com/macros/s/AKfycbx65qrev8oWu80umaetBTyaYf0GAWjS1DRxEodhsPcPtqeR5JdeVBjSBDlJgXc2k4mB/exec" rel="noopener noreferrer">
-          להיכנס למערכת עכשיו ▸
-        </a>
-      </div>
-
-      <p class="hint muted">אם לא הופנית אוטומטית, לחצו על הכפתור.</p>
-    </section>
-
-    <footer>
-      אם יש בעיה או תקלה — אנא פנו אל <strong>שלישות גדוד 1895</strong>.
-    </footer>
-  </main>
+  <!-- סרטון פתיחה -->
+  <video id="introVideo" autoplay muted playsinline>
+    <source src="Carpool_Yaela_Opening_Animation.mp4" type="video/mp4">
+    הדפדפן שלך לא תומך בניגון וידאו.
+  </video>
 
   <script>
-    (function(){
-      const TARGET = "https://script.google.com/macros/s/AKfycbx65qrev8oWu80umaetBTyaYf0GAWjS1DRxEodhsPcPtqeR5JdeVBjSBDlJgXc2k4mB/exec";
-      // הפניה אחרי 5 שניות (5000 מילישניות)
-      setTimeout(function(){
-        try {
-          window.location.replace(TARGET);
-        } catch (e) {
-          window.location.href = TARGET;
-        }
-      }, 5000);
-      document.getElementById('fallbackLink').setAttribute('href', TARGET);
-    })();
-  </script>
+    const TARGET = "https://script.google.com/macros/s/AKfycbx65qrev8oWu80umaetBTyaYf0GAWjS1DRxEodhsPcPtqeR5JdeVBjSBDlJgXc2k4mB/exec";
+    const video = document.getElementById('introVideo');
 
-  <noscript>
-    <div style="margin-top:12px;text-align:center">
-      הדפדפן שלך לא מריץ JavaScript. נא ללחוץ כאן:
-      <a href="https://script.google.com/macros/s/AKfycbx65qrev8oWu80umaetBTyaYf0GAWjS1DRxEodhsPcPtqeR5JdeVBjSBDlJgXc2k4mB/exec">כניסה למערכת הקארפול</a>
-    </div>
-  </noscript>
+    // ברגע שהסרטון נגמר – הפניה
+    video.addEventListener('ended', () => {
+      window.location.replace(TARGET);
+    });
+
+    // fallback: אם משהו השתבש, מפנים אחרי 7 שניות
+    setTimeout(() => {
+      window.location.replace(TARGET);
+    }, 7000);
+  </script>
 </body>
 </html>
