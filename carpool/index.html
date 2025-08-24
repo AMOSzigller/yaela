@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>מערכת הקארפול – גדוד 1895</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    video {
+      max-width: 100%;
+      max-height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <!-- סרטון פתיחה -->
+  <video id="introVideo" autoplay muted playsinline>
+    <source src="intro.mp4" type="video/mp4">
+    הדפדפן שלך לא תומך בניגון וידאו.
+  </video>
+
+  <script>
+    const TARGET = "https://script.google.com/macros/s/AKfycbx65qrev8oWu80umaetBTyaYf0GAWjS1DRxEodhsPcPtqeR5JdeVBjSBDlJgXc2k4mB/exec";
+    const video = document.getElementById('introVideo');
+
+    // ברגע שהסרטון נגמר – הפניה
+    video.addEventListener('ended', () => {
+      window.location.replace(TARGET);
+    });
+
+    // fallback: אם משהו השתבש, מפנים אחרי 7 שניות
+    setTimeout(() => {
+      window.location.replace(TARGET);
+    }, 7000);
+  </script>
+</body>
+</html>
