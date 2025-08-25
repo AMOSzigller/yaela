@@ -11,7 +11,7 @@
   <meta property="og:image" content="logo.png">
   <style>
     :root {
-      --primary-color: #556B2F; /* olive-drab (מהקובץ המצורף) */
+      --primary-color: #556B2F; /* olive-drab */
       --secondary-color: #F5F5DC; /* beige */
       --text-color: #333;
       --card-bg-color: #FFFFFF;
@@ -30,10 +30,7 @@
       place-items: center;
       padding: 24px;
     }
-    .wrap {
-      width: 100%;
-      max-width: 980px;
-    }
+    .wrap { width: 100%; max-width: 980px; }
     header { text-align: center; margin-bottom: 28px; }
     header h1 { margin: 0; color: var(--primary-color); font-weight: 700; font-size: clamp(1.6rem, 2.4vw, 2.2rem); }
     header p { margin: 8px 0 0; opacity: .8; }
@@ -60,7 +57,7 @@
     a.link-card::before { /* פס צבעוני קטן משמאל */
       content: "";
       position: absolute;
-      inset-inline-start: 0; /* RTL/לוקלי */
+      inset-inline-start: 0;
       top: 0; bottom: 0;
       width: 6px;
       border-top-left-radius: 14px;
@@ -97,15 +94,84 @@
 
     footer { margin-top: 28px; text-align: center; font-size: .9rem; opacity: .75; }
 
-    /* Brand header */
     .brand { display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; }
     .brand img { width: 56px; height: 56px; object-fit: contain; border-radius: 10px; border: 1px solid var(--border-color); background: #fff; padding: 6px; box-shadow: 0 1px 0 rgba(0,0,0,.04); }
     .brand h1 { margin: 0; color: var(--primary-color); font-weight: 700; font-size: clamp(1.6rem, 2.4vw, 2.2rem); }
     .brand-sub { margin: 8px 0 0; opacity: .8; text-align: center; }
+
+    /* ===== Password Gate & Blur ===== */
+    body.locked { overflow: hidden; } /* אין גלילה כשהשער מוצג */
+    body.locked #main {
+      filter: blur(10px) brightness(0.7);
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .gate {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.65);
+      backdrop-filter: blur(4px);
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      z-index: 9999;
+    }
+    .gate[hidden] { display: none; }
+    .gate-card {
+      width: min(96vw, 420px);
+      background: #fff;
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 10px 28px rgba(0,0,0,.15);
+    }
+    .gate-title { margin: 0 0 8px; color: var(--primary-color); font-size: 1.2rem; font-weight: 700; text-align: center; }
+    .gate-desc { margin: 0 0 14px; opacity: .8; text-align: center; }
+    .gate-form { display: grid; gap: 10px; }
+    .gate-input {
+      padding: 12px 14px;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      font-size: 1rem;
+    }
+    .gate-actions { display: flex; gap: 10px; justify-content: center; align-items: center; }
+    .gate-btn {
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--primary-color);
+      background: var(--primary-color);
+      color: #fff;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .gate-error {
+      display: none;
+      color: #b00020;
+      text-align: center;
+      font-size: .95rem;
+    }
+    .gate-error[aria-hidden="false"] { display: block; }
   </style>
 </head>
-<body>
-  <main class="wrap" role="main">
+
+<body class="locked">
+  <!-- Password Gate -->
+  <div class="gate" id="gate" role="dialog" aria-modal="true" aria-labelledby="gate-title" aria-describedby="gate-desc">
+    <div class="gate-card">
+      <h2 class="gate-title" id="gate-title">כניסה מאובטחת</h2>
+      <p class="gate-desc" id="gate-desc">אנא הזינו סיסמה כדי להיכנס.</p>
+      <form class="gate-form" id="gate-form" autocomplete="off">
+        <input class="gate-input" id="gate-input" type="password" placeholder="סיסמה" inputmode="text" aria-label="סיסמה" required />
+        <div class="gate-actions">
+          <button type="submit" class="gate-btn">כניסה</button>
+        </div>
+        <div class="gate-error" id="gate-error" aria-hidden="true">סיסמה שגויה. נסו שוב.</div>
+      </form>
+    </div>
+  </div>
+
+  <main class="wrap" role="main" aria-hidden="true" id="main">
     <header>
       <div class="brand" role="banner">
         <img src="logo.png" alt="לוגו היחידה" onerror="this.style.display='none'">
@@ -115,6 +181,13 @@
     </header>
 
     <section class="grid" aria-label="קישורים">
+      <!-- כרטיסייה חדשה: קארפול יעלה / דשבורד מפקד -->
+      <a class="link-card" href="https://script.google.com/macros/s/AKfycbyKZfd-BRduRq0vU8hMJyQgsGvDhIENsWG2YmlWYdZUExo9fNGcZopdtcZ-v6Wat3dZ/exec" target="_blank" rel="noopener noreferrer" aria-label="קארפול יעלה - דשבורד מפקד">
+        <div class="title">קארפול יעלה</div>
+        <div class="desc">דשבורד מפקד</div>
+        <span class="launch" role="button" aria-hidden="true">פתח ▸</span>
+      </a>
+
       <a class="link-card" href="https://script.google.com/macros/s/AKfycbwsAZOOY89UwrmEHzNOIwItAfYn9X3zF1-NsAqa5sat7OxdJEG0jfYvW0BEb-pMyXVX6A/exec?view=dashboard" target="_blank" rel="noopener noreferrer" aria-label="צפי הגעה לאימון">
         <div class="title">צפי הגעה לאימון</div>
         <div class="desc">בחלוקה לפי מפקדים ומחלקות</div>
@@ -138,5 +211,46 @@
       לשאלות או בעיות אנא פנו אל שלישות גדוד 1895
     </footer>
   </main>
+
+  <script>
+    (function () {
+      const PASS = "Aa123456";
+      const gateEl = document.getElementById('gate');
+      const mainEl = document.getElementById('main');
+      const formEl = document.getElementById('gate-form');
+      const inputEl = document.getElementById('gate-input');
+      const errEl = document.getElementById('gate-error');
+
+      // אם כבר הוזן בהצלחה קודם בלשונית הזו — פתח מיד
+      const ok = sessionStorage.getItem('gate_ok') === '1';
+      if (ok) {
+        gateEl.hidden = true;
+        mainEl.removeAttribute('aria-hidden');
+        document.body.classList.remove('locked');   // הסר טשטוש ונעילה
+      } else {
+        // נעילה כברירת מחדל קיימת על body.locked
+        setTimeout(() => inputEl.focus(), 0);
+      }
+
+      formEl.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const val = inputEl.value || "";
+        if (val === PASS) {
+          sessionStorage.setItem('gate_ok', '1');
+          gateEl.hidden = true;
+          mainEl.removeAttribute('aria-hidden');
+          document.body.classList.remove('locked');
+        } else {
+          errEl.setAttribute('aria-hidden', 'false');
+          inputEl.select();
+        }
+      });
+
+      // אפשרות לאנטר בתוך השדה
+      inputEl.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') formEl.requestSubmit();
+      });
+    })();
+  </script>
 </body>
 </html>
