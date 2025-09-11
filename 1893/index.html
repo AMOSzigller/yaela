@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>מערכת יעלה - יום ראיונות</title>
+  <title>מערכת יעלה</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" rel="stylesheet">
@@ -54,7 +54,7 @@
       grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
       gap:18px;
     }
-    a.link-card{
+    a.link-card, .link-card-action{
       position:relative;
       display:block;
       padding:18px 20px;
@@ -66,8 +66,9 @@
       box-shadow:0 1px 0 rgba(0,0,0,.03);
       transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
       outline:none;
+      cursor: pointer;
     }
-    a.link-card::before{
+    a.link-card::before, .link-card-action::before{
       content:"";
       position:absolute;
       inset-inline-start:0; top:0; bottom:0;
@@ -77,7 +78,7 @@
       background:var(--primary-color);
       opacity:.9;
     }
-    a.link-card:hover, a.link-card:focus-visible{
+    a.link-card:hover, a.link-card:focus-visible, .link-card-action:hover, .link-card-action:focus-visible{
       transform:translateY(-2px);
       border-color:rgba(85,107,47,.45);
       box-shadow:0 6px 18px rgba(0,0,0,.08);
@@ -94,168 +95,133 @@
     .launch:focus-visible{outline:3px solid rgba(85,107,47,.35); outline-offset:2px}
 
     footer{margin-top:28px;text-align:center;font-size:.9rem;opacity:.75}
+    
+    /* Custom Popup */
+    .popup-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.6);
+        backdrop-filter: blur(4px);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+    .popup-content {
+        background: #fff;
+        padding: 24px;
+        border-radius: 16px;
+        text-align: center;
+        max-width: 320px;
+        width: 90%;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    .popup-content p { margin: 0 0 16px; }
+    .popup-content a { color: var(--primary-color); font-weight: 700; }
+    .popup-close {
+        padding: 8px 16px;
+        border-radius: 999px;
+        border: 1px solid #ccc;
+        background: #eee;
+        cursor: pointer;
+        margin-top: 10px;
+    }
 
-    /* Password Gate */
-    body.locked{overflow:hidden}
-    body.locked #main{filter:blur(10px) brightness(0.7); pointer-events:none; user-select:none}
-    .gate{
-      position:fixed; inset:0; background:rgba(0,0,0,.65); backdrop-filter:blur(4px);
-      display:grid; place-items:center; padding:24px; z-index:9999;
-    }
-    .gate[hidden]{display:none}
-    .gate-card{
-      width:min(96vw,420px); background:#fff; border:1px solid var(--border-color);
-      border-radius:16px; padding:20px; box-shadow:0 10px 28px rgba(0,0,0,.15);
-    }
-    .gate-title{margin:0 0 8px; color:var(--primary-color); font-size:1.2rem; font-weight:700; text-align:center}
-    .gate-desc{margin:0 0 14px; opacity:.8; text-align:center}
-    .gate-form{display:grid; gap:10px}
-    .gate-input{padding:12px 14px; border:1px solid var(--border-color); border-radius:10px; font-size:1rem}
-    .gate-btn{padding:10px 16px; border-radius:999px; border:1px solid var(--primary-color); background:var(--primary-color); color:#fff; font-weight:700; cursor:pointer}
-    .gate-error{display:none; color:#b00020; text-align:center; font-size:.95rem}
-    .gate-error[aria-hidden="false"]{display:block}
   </style>
 </head>
 
-<body class="locked">
-  <!-- Password Gate -->
-  <div class="gate" id="gate" role="dialog" aria-modal="true" aria-labelledby="gate-title" aria-describedby="gate-desc">
-    <div class="gate-card">
-      <h2 class="gate-title" id="gate-title">כניסה מאובטחת</h2>
-      <p class="gate-desc" id="gate-desc">אנא הזינו סיסמה כדי להיכנס.</p>
-      <form class="gate-form" id="gate-form" autocomplete="off">
-        <input class="gate-input" id="gate-input" type="password" placeholder="סיסמה" inputmode="text" aria-label="סיסמה" required />
-        <div class="gate-actions" style="display:flex;gap:10px;justify-content:center">
-          <button type="submit" class="gate-btn">כניסה</button>
-        </div>
-        <div class="gate-error" id="gate-error" aria-hidden="true">סיסמה שגויה. נסו שוב.</div>
-      </form>
-    </div>
-  </div>
-
-  <main class="wrap" role="main" aria-hidden="true" id="main">
+<body>
+  <main class="wrap" role="main">
     <header>
       <div class="brand" role="banner">
         <img src="logo.png" alt="לוגו" onerror="this.style.display='none'">
-        <h1>מערכת יעלה - יום ראיונות</h1>
+        <h1>מערכת יעלה</h1>
       </div>
-      <p class="brand-sub">גדוד 1893 - ספטמבר 2025</p>
+      <p class="brand-sub">גדוד 1893</p>
     </header>
 
-    <!-- תפעול הכנס -->
-    <section class="group" aria-label="תפעול הכנס">
-      <h2>תפעול הכנס</h2>
+    <section class="group" aria-label="יום ראיונות">
+      <h2>יום ראיונות ספטמבר 2025</h2>
       <div class="grid">
-        <a class="link-card" href="https://script.google.com/macros/s/AKfycbxYKPW9uA3GNadLdbNRjuWlfusbFlKNVBB3hBEX7xFFnV_lrHQOjR-odyn_DHKFbaYC/exec?page=checkin" target="_blank" rel="noopener noreferrer">
-          <div class="title">עמדת קליטה</div>
-          <div class="desc">Check-in</div>
-          <span class="launch" aria-hidden="true">פתח ▸</span>
-        </a>
-
-        <a class="link-card" href="https://script.google.com/macros/s/AKfycbxYKPW9uA3GNadLdbNRjuWlfusbFlKNVBB3hBEX7xFFnV_lrHQOjR-odyn_DHKFbaYC/exec?page=release" target="_blank" rel="noopener noreferrer">
-          <div class="title">עמדת שחרור</div>
-          <div class="desc">סיום ושחרור</div>
-          <span class="launch" aria-hidden="true">פתח ▸</span>
-        </a>
-
-        <a class="link-card" href="https://script.google.com/macros/s/AKfycbwrxyD9b1k-N42rOS9WlxBMiQvqtQw1bTfsvXMtXTMmJjj-fHfFLdsD_b9vOi5XZoOY9Q/exec" target="_blank" rel="noopener noreferrer">
-          <div class="title">איתור מועמד</div>
-          <div class="desc">חיפוש מועמד</div>
-          <span class="launch" aria-hidden="true">פתח ▸</span>
-        </a>
-
-        <a class="link-card" href="https://script.google.com/macros/s/AKfycbwrxyD9b1k-N42rOS9WlxBMiQvqtQw1bTfsvXMtXTMmJjj-fHfFLdsD_b9vOi5XZoOY9Q/exec?page=latecomers" target="_blank" rel="noopener noreferrer">
-          <div class="title">דוח מאחרים</div>
-          <div class="desc">דוח משתתפים מאחרים</div>
-          <span class="launch" aria-hidden="true">פתח ▸</span>
-        </a>
-
-        <a class="link-card" href="https://script.google.com/macros/s/AKfycbxYKPW9uA3GNadLdbNRjuWlfusbFlKNVBB3hBEX7xFFnV_lrHQOjR-odyn_DHKFbaYC/exec?page=dashboard" target="_blank" rel="noopener noreferrer">
-          <div class="title">דשבורד שלישות</div>
-          <div class="desc">סקירת שלישות</div>
+        <a class="link-card" href="https://yae.la/1893/interview" target="_blank" rel="noopener noreferrer">
+          <div class="title">כניסה למערכת</div>
           <span class="launch" aria-hidden="true">פתח ▸</span>
         </a>
       </div>
     </section>
 
-    <!-- עמדת מראיין -->
-    <section class="group" aria-label="עמדת מראיין">
-      <h2>עמדת מראיין</h2>
+    <section class="group" aria-label="מערכת הסעות">
+      <h2>מערכת הסעות גדודית</h2>
       <div class="grid">
-        <a class="link-card" href="https://script.google.com/macros/s/AKfycbxYKPW9uA3GNadLdbNRjuWlfusbFlKNVBB3hBEX7xFFnV_lrHQOjR-odyn_DHKFbaYC/exec" target="_blank" rel="noopener noreferrer">
-          <div class="title">עמדת מראיין</div>
-          <div class="desc">מסך ראיונות</div>
+        <a class="link-card" href="http://yae.la/1893/carpool" target="_blank" rel="noopener noreferrer">
+          <div class="title">כניסה למערכת</div>
+          <span class="launch" aria-hidden="true">פתח ▸</span>
+        </a>
+        <a class="link-card" href="http://yae.la/1893/carpool/admin" target="_blank" rel="noopener noreferrer">
+          <div class="title">מסך מפקד</div>
           <span class="launch" aria-hidden="true">פתח ▸</span>
         </a>
       </div>
     </section>
 
-    <!-- פיקוד -->
-    <section class="group" aria-label="פיקוד">
-      <h2>פיקוד</h2>
+    <section class="group" aria-label="ניהול">
+      <h2>מערכות ניהול</h2>
       <div class="grid">
-        <a class="link-card" href="https://script.google.com/macros/s/AKfycbxYKPW9uA3GNadLdbNRjuWlfusbFlKNVBB3hBEX7xFFnV_lrHQOjR-odyn_DHKFbaYC/exec?page=pikud" target="_blank" rel="noopener noreferrer">
-          <div class="title">דשבורד פיקוד</div>
-          <div class="desc">סקירת פיקוד</div>
-          <span class="launch" aria-hidden="true">פתח ▸</span>
-        </a>
+        <div class="link-card-action" onclick="showPopup('battalion')">
+          <div class="title">מערכת לניהול גדוד</div>
+          <div class="desc">לחץ לפתיחת בקשה</div>
+        </div>
+        <div class="link-card-action" onclick="showPopup('training')">
+          <div class="title">מערכת לניהול אימון</div>
+          <div class="desc">לחץ לפתיחת בקשה</div>
+        </div>
       </div>
     </section>
 
-    <!-- גוגל שיט (אחרון) -->
-    <section class="group" aria-label="גוגל שיט">
-      <h2>גוגל שיט</h2>
-      <div class="grid">
-        <a class="link-card" href="https://docs.google.com/spreadsheets/d/17ARGRn1_1xstHt7evA-WS3uMCBDPMXoVsvtYugQRnNI/edit?usp=sharing" target="_blank" rel="noopener noreferrer">
-          <div class="title">הגיליון הראשי</div>
-          <div class="desc">ניהול יום ראיונות – Google Sheets</div>
-          <span class="launch" aria-hidden="true">פתח ▸</span>
-        </a>
-      </div>
-    </section>
-
-    <footer>לשאלות או בעיות – פנו אל שלישות גדוד 1893</footer>
-    <footer>גיא - 052-5850107</footer>
-    <footer>בר - 052-3661999 (במקרים דחופים)</footer>
+    <footer>לשאלות או בעיות פנו אל שלישות גדוד 1893</footer>
   </main>
+  
+  <div class="popup-overlay" id="popup-overlay">
+      <div class="popup-content">
+          <p id="popup-message"></p>
+          <button class="popup-close" onclick="hidePopup()">סגור</button>
+      </div>
+  </div>
 
   <script>
-    (function () {
-      const PASS = "1893"; // סיסמת כניסה
-      const gateEl = document.getElementById('gate');
-      const mainEl = document.getElementById('main');
-      const formEl = document.getElementById('gate-form');
-      const inputEl = document.getElementById('gate-input');
-      const errEl = document.getElementById('gate-error');
+    function showPopup(type) {
+      const overlay = document.getElementById('popup-overlay');
+      const messageEl = document.getElementById('popup-message');
+      let message = '';
+      let number = '972523661999';
+      let waMessage = '';
 
-      // אם כבר הוזן בהצלחה בלשונית הזו – פותחים מיד
-      const ok = sessionStorage.getItem('gate_ok') === '1';
-      if (ok) {
-        gateEl.hidden = true;
-        mainEl.removeAttribute('aria-hidden');
-        document.body.classList.remove('locked');
-      } else {
-        setTimeout(() => inputEl.focus(), 0);
+      if (type === 'battalion') {
+        waMessage = encodeURIComponent('היי בר, גדוד 1893 מבקש גישה למערכת לניהול גדוד, איך עושים את זה?');
+        message = `אין מערכת פעילה. לפתיחת מערכת יש <a href="https://wa.me/${number}?text=${waMessage}" target="_blank">ללחוץ כאן</a>.`;
+      } else if (type === 'training') {
+        waMessage = encodeURIComponent('היי בר, גדוד 1893 מבקש גישה למערכת לניהול אימון, איך עושים את זה?');
+        message = `אין מערכת פעילה. לפתיחת מערכת יש <a href="https://wa.me/${number}?text=${waMessage}" target="_blank">ללחוץ כאן</a>.`;
       }
+      
+      messageEl.innerHTML = message;
+      overlay.style.display = 'flex';
+    }
 
-      formEl.addEventListener('submit', function (e) {
-        e.preventDefault();
-        const val = inputEl.value || "";
-        if (val === PASS) {
-          sessionStorage.setItem('gate_ok', '1');
-          gateEl.hidden = true;
-          mainEl.removeAttribute('aria-hidden');
-          document.body.classList.remove('locked');
-        } else {
-          errEl.setAttribute('aria-hidden', 'false');
-          inputEl.select();
+    function hidePopup() {
+      const overlay = document.getElementById('popup-overlay');
+      overlay.style.display = 'none';
+    }
+    
+    // Close popup if clicked outside the content area
+    document.getElementById('popup-overlay').addEventListener('click', function(event) {
+        if (event.target === this) {
+            hidePopup();
         }
-      });
-
-      inputEl.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter') formEl.requestSubmit();
-      });
-    })();
+    });
   </script>
 </body>
 </html>
