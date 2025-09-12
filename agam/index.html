@@ -201,8 +201,8 @@
             <ul class="links-list">
                 <li><button id="show-popup-btn">קליטת מתייצבים</button></li>
                 <li><a href="https://script.google.com/macros/s/AKfycbxP011m1RCnedYLQTX_EuFlNzst8vYuPZz8l6nBtzTU547Dc7YuJooz7I_hqHIK-9K_SA/exec?page=stats" target="_blank" rel="noopener noreferrer">צפי התייצבות לאימון</a></li>
-                <li><a href="https://script.google.com/macros/s/AKfycbxP011m1RCnedYLQTX_EuFlNzst8vYuPZz8l6nBtzTU547Dc7YuJooz7I_hqHIK-9K_SA/exec" target="_blank" rel="noopener noreferrer">שיחות שלישות ממתינות</a></li>
-                <li><a href="https://script.google.com/macros/s/AKfycbxP011m1RCnedYLQTX_EuFlNzst8vYuPZz8l6nBtzTU547Dc7YuJooz7I_hqHIK-9K_SA/exec?page=commander" target="_blank" rel="noopener noreferrer">שיחות מפקד ממתינות</a></li>
+                <li><a id="adjutant-calls-link" href="https://script.google.com/macros/s/AKfycbxP011m1RCnedYLQTX_EuFlNzst8vYuPZz8l6nBtzTU547Dc7YuJooz7I_hqHIK-9K_SA/exec" target="_blank" rel="noopener noreferrer">שיחות שלישות ממתינות (...)</a></li>
+                <li><a id="commander-calls-link" href="https://script.google.com/macros/s/AKfycbxP011m1RCnedYLQTX_EuFlNzst8vYuPZz8l6nBtzTU547Dc7YuJooz7I_hqHIK-9K_SA/exec?page=commander" target="_blank" rel="noopener noreferrer">שיחות מפקד ממתינות (...)</a></li>
                 <li><a href="https://www.google.com" target="_blank" rel="noopener noreferrer">ציוד שחסר לחיילים</a></li>
                 <li><a href="https://script.google.com/macros/s/AKfycbyKZfd-BRduRq0vU8hMJyQgsGvDhIENsWG2YmlWYdZUExo9fNGcZopdtcZ-v6Wat3dZ/exec" target="_blank" rel="noopener noreferrer">ניהול מערכת קארפול</a></li>
             </ul>
@@ -218,6 +218,37 @@
 
 
     <script>
+        // ! חשוב מאוד !
+        // הדבק כאן את כתובת ה-URL של פרויקט ה-Apps Script שלך.
+        const WEB_APP_URL = 'הדבק כאן את כתובת ה-URL שלך';
+        const SCRIPT_URL_WITH_PARAMS = WEB_APP_URL + '?page=counts';
+
+        // --- Function to fetch and update the counts ---
+        async function updateCallCounts() {
+            try {
+                const response = await fetch(SCRIPT_URL_WITH_PARAMS);
+                if (!response.ok) throw new Error('Network response was not ok');
+                
+                const data = await response.json();
+                if (data.error) throw new Error(data.error);
+
+                const adjutantLink = document.getElementById('adjutant-calls-link');
+                const commanderLink = document.getElementById('commander-calls-link');
+
+                if (adjutantLink && data.adjutantCalls !== undefined) {
+                    adjutantLink.textContent = `שיחות שלישות ממתינות (${data.adjutantCalls})`;
+                }
+                if (commanderLink && data.commanderCalls !== undefined) {
+                    commanderLink.textContent = `שיחות מפקד ממתינות (${data.commanderCalls})`;
+                }
+
+            } catch (error) {
+                console.error('Failed to fetch counts:', error);
+                document.getElementById('adjutant-calls-link').textContent = 'שיחות שלישות (שגיאה)';
+                document.getElementById('commander-calls-link').textContent = 'שיחות מפקד (שגיאה)';
+            }
+        }
+
         // --- Password Logic ---
         document.getElementById('password-form').addEventListener('submit', function(event) {
             event.preventDefault(); 
@@ -231,6 +262,8 @@
             if (password === correctPassword) {
                 loginContainer.style.display = 'none';
                 mainContent.style.display = 'block';
+                // Call the function to get the counts AFTER the user logs in
+                updateCallCounts();
             } else {
                 errorMessage.style.display = 'block';
                 document.getElementById('password-input').value = '';
@@ -242,21 +275,12 @@
         var btn = document.getElementById("show-popup-btn");
         var span = document.getElementsByClassName("close-btn")[0];
 
-        // When the user clicks the button, open the modal 
-        btn.onclick = function() {
-          modal.style.display = "block";
-        }
-
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
-          modal.style.display = "none";
-        }
-
-        // When the user clicks anywhere outside of the modal, close it
+        btn.onclick = function() { modal.style.display = "block"; }
+        span.onclick = function() { modal.style.display = "none"; }
         window.onclick = function(event) {
-          if (event.target == modal) {
-            modal.style.display = "none";
-          }
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
         }
     </script>
 
