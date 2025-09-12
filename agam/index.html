@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>אימון אגם אוק' 2025</title>
+    <link rel="icon" href="logo.png" type="image/png">
+    <style>
+        :root {
+            --primary-color: #005a9c;
+            --secondary-color: #f8f9fa;
+            --text-color: #333;
+            --button-hover: #004a80;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 15px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        /* Login Form Styling */
+        #login-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        #login-container h2 {
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+
+        #password-input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            text-align: right;
+        }
+
+        #submit-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+
+        #submit-btn:hover {
+            background-color: var(--button-hover);
+        }
+
+        #error-message {
+            color: red;
+            margin-top: 10px;
+            display: none;
+        }
+
+        /* Main Content Styling */
+        #main-content {
+            display: none; /* Hidden by default */
+            background-color: white;
+            padding: 25px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        .logo {
+            max-width: 100px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+        }
+
+        .links-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .links-list li a {
+            display: block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px;
+            margin-bottom: 12px;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .links-list li a:hover {
+            background-color: var(--button-hover);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div id="login-container">
+            <h2>כניסה למערכת</h2>
+            <form id="password-form">
+                <label for="password-input">אנא הזן סיסמה:</label>
+                <input type="password" id="password-input" required>
+                <p id="error-message">סיסמה שגויה, נסה שוב.</p>
+                <button type="submit" id="submit-btn">כניסה</button>
+            </form>
+        </div>
+
+        <div id="main-content">
+            <img src="logo.png" alt="לוגו" class="logo">
+            <h1>גדוד 1895, אימון אג"ם, אוקטובר 2025</h1>
+            <ul class="links-list">
+                <li><a href="https://script.google.com/macros/s/AKfycbxP011m1RCnedYLQTX_EuFlNzst8vYuPZz8l6nBtzTU547Dc7YuJooz7I_hqHIK-9K_SA/exec?page=stats" target="_blank" rel="noopener noreferrer">צפי התייצבות לאימון</a></li>
+                <li><a href="https://script.google.com/macros/s/AKfycbxP011m1RCnedYLQTX_EuFlNzst8vYuPZz8l6nBtzTU547Dc7YuJooz7I_hqHIK-9K_SA/exec" target="_blank" rel="noopener noreferrer">שיחות שלישות ממתינות</a></li>
+                <li><a href="https://script.google.com/macros/s/AKfycbxP011m1RCnedYLQTX_EuFlNzst8vYuPZz8l6nBtzTU547Dc7YuJooz7I_hqHIK-9K_SA/exec?page=commander" target="_blank" rel="noopener noreferrer">שיחות מפקד ממתינות</a></li>
+                <li><a href="https://script.google.com/macros/s/AKfycbyKZfd-BRduRq0vU8hMJyQgsGvDhIENsWG2YmlWYdZUExo9fNGcZopdtcZ-v6Wat3dZ/exec" target="_blank" rel="noopener noreferrer">ניהול מערכת קארפול</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('password-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form from submitting the traditional way
+            
+            const password = document.getElementById('password-input').value;
+            const correctPassword = 'Agam1895';
+            const loginContainer = document.getElementById('login-container');
+            const mainContent = document.getElementById('main-content');
+            const errorMessage = document.getElementById('error-message');
+
+            if (password === correctPassword) {
+                loginContainer.style.display = 'none';
+                mainContent.style.display = 'block';
+            } else {
+                errorMessage.style.display = 'block';
+                // Optional: clear the input field after a wrong attempt
+                document.getElementById('password-input').value = '';
+            }
+        });
+    </script>
+
+</body>
+</html>
