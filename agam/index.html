@@ -104,8 +104,10 @@
             margin: 0;
         }
 
-        .links-list li a {
+        .links-list li a, .links-list li button {
             display: block;
+            width: 100%;
+            box-sizing: border-box;
             background-color: var(--primary-color);
             color: white;
             padding: 15px;
@@ -114,12 +116,69 @@
             text-decoration: none;
             font-size: 1.1rem;
             font-weight: 500;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            font-family: inherit;
             transition: background-color 0.3s, transform 0.2s;
         }
 
-        .links-list li a:hover {
+        .links-list li a:hover, .links-list li button:hover {
             background-color: var(--button-hover);
             transform: translateY(-2px);
+        }
+        
+        /* Popup (Modal) Styling */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgba(0,0,0,0.5);
+            -webkit-backdrop-filter: blur(5px);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 40% auto;
+            padding: 25px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            text-align: center;
+            animation: fadeIn 0.3s;
+        }
+        
+        @keyframes fadeIn {
+          from {opacity: 0; transform: scale(0.9);}
+          to {opacity: 1; transform: scale(1);}
+        }
+
+        .close-btn {
+            color: #aaa;
+            float: left;
+            font-size: 28px;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        .close-btn:hover,
+        .close-btn:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        .modal-content p {
+            font-size: 1.2rem;
+            margin: 20px 0;
         }
     </style>
 </head>
@@ -140,17 +199,28 @@
             <img src="logo.png" alt="לוגו" class="logo">
             <h1>גדוד 1895, אימון אג"ם, אוקטובר 2025</h1>
             <ul class="links-list">
+                <li><button id="show-popup-btn">קליטת מתייצבים</button></li>
                 <li><a href="https://script.google.com/macros/s/AKfycbxP011m1RCnedYLQTX_EuFlNzst8vYuPZz8l6nBtzTU547Dc7YuJooz7I_hqHIK-9K_SA/exec?page=stats" target="_blank" rel="noopener noreferrer">צפי התייצבות לאימון</a></li>
                 <li><a href="https://script.google.com/macros/s/AKfycbxP011m1RCnedYLQTX_EuFlNzst8vYuPZz8l6nBtzTU547Dc7YuJooz7I_hqHIK-9K_SA/exec" target="_blank" rel="noopener noreferrer">שיחות שלישות ממתינות</a></li>
                 <li><a href="https://script.google.com/macros/s/AKfycbxP011m1RCnedYLQTX_EuFlNzst8vYuPZz8l6nBtzTU547Dc7YuJooz7I_hqHIK-9K_SA/exec?page=commander" target="_blank" rel="noopener noreferrer">שיחות מפקד ממתינות</a></li>
+                <li><a href="https://www.google.com" target="_blank" rel="noopener noreferrer">ציוד שחסר לחיילים</a></li>
                 <li><a href="https://script.google.com/macros/s/AKfycbyKZfd-BRduRq0vU8hMJyQgsGvDhIENsWG2YmlWYdZUExo9fNGcZopdtcZ-v6Wat3dZ/exec" target="_blank" rel="noopener noreferrer">ניהול מערכת קארפול</a></li>
             </ul>
         </div>
     </div>
+    
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <p>האימון טרם החל</p>
+      </div>
+    </div>
+
 
     <script>
+        // --- Password Logic ---
         document.getElementById('password-form').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent form from submitting the traditional way
+            event.preventDefault(); 
             
             const password = document.getElementById('password-input').value;
             const correctPassword = 'Agam1895';
@@ -163,10 +233,31 @@
                 mainContent.style.display = 'block';
             } else {
                 errorMessage.style.display = 'block';
-                // Optional: clear the input field after a wrong attempt
                 document.getElementById('password-input').value = '';
             }
         });
+        
+        // --- Modal (Popup) Logic ---
+        var modal = document.getElementById("myModal");
+        var btn = document.getElementById("show-popup-btn");
+        var span = document.getElementsByClassName("close-btn")[0];
+
+        // When the user clicks the button, open the modal 
+        btn.onclick = function() {
+          modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+          modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+          if (event.target == modal) {
+            modal.style.display = "none";
+          }
+        }
     </script>
 
 </body>
