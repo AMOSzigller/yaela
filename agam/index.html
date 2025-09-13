@@ -3,286 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>אימון אגם אוק' 2025</title>
-    <link rel="icon" href="logo.png" type="image/png">
-    <style>
-        :root {
-            --primary-color: #005a9c;
-            --secondary-color: #f8f9fa;
-            --text-color: #333;
-            --button-hover: #004a80;
-            --border-radius: 8px;
-            --box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
+    <title>מעבר למערכת ניהול האימון...</title>
 
+    <meta http-equiv="refresh" content="0; url=https://script.google.com/macros/s/AKfycbxP011m1RCnedYLQTX_EuFlNzst8vYuPZz8l6nBtzTU547Dc7YuJooz7I_hqHIK-9K_SA/exec">
+
+    <link rel="canonical" href="https://script.google.com/macros/s/AKfycbxP011m1RCnedYLQTX_EuFlNzst8vYuPZz8l6nBtzTU547Dc7YuJooz7I_hqHIK-9K_SA/exec">
+
+    <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: var(--secondary-color);
-            color: var(--text-color);
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
             text-align: center;
-            padding: 15px;
+            padding-top: 60px;
+            background-color: #f8f9fa;
+            color: #333;
         }
-
-        .container {
-            width: 100%;
-            max-width: 500px;
-        }
-        
-        /* Login Form Styling */
-        #login-container {
-            background-color: white;
-            padding: 30px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-        }
-
-        #login-container h2 {
-            margin-top: 0;
-            color: var(--primary-color);
-        }
-
-        #password-input {
-            width: calc(100% - 20px);
-            padding: 10px;
-            margin-top: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            text-align: right;
-        }
-
-        #submit-btn {
-            width: 100%;
-            padding: 12px;
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            margin-top: 20px;
-            transition: background-color 0.3s;
-        }
-
-        #submit-btn:hover {
-            background-color: var(--button-hover);
-        }
-
-        #error-message {
-            color: red;
-            margin-top: 10px;
-            display: none;
-        }
-
-        /* Main Content Styling */
-        #main-content {
-            display: none; /* Hidden by default */
-            background-color: white;
-            padding: 25px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-        }
-
-        .logo {
-            max-width: 100px;
-            margin-bottom: 20px;
-        }
-
-        h1 {
-            font-size: 1.5rem;
-            color: var(--primary-color);
-            margin-bottom: 30px;
-        }
-
-        .links-list {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .links-list li a, .links-list li button {
-            display: block;
-            width: 100%;
-            box-sizing: border-box;
-            background-color: var(--primary-color);
-            color: white;
-            padding: 15px;
-            margin-bottom: 12px;
-            border-radius: var(--border-radius);
+        a {
+            color: #005a9c;
             text-decoration: none;
-            font-size: 1.1rem;
-            font-weight: 500;
-            border: none;
-            cursor: pointer;
-            text-align: center;
-            font-family: inherit;
-            transition: background-color 0.3s, transform 0.2s;
         }
-
-        .links-list li a:hover, .links-list li button:hover {
-            background-color: var(--button-hover);
-            transform: translateY(-2px);
-        }
-        
-        /* Popup (Modal) Styling */
-        .modal {
-            display: none; 
-            position: fixed; 
-            z-index: 1; 
-            left: 0;
-            top: 0;
-            width: 100%; 
-            height: 100%; 
-            overflow: auto; 
-            background-color: rgba(0,0,0,0.5);
-            -webkit-backdrop-filter: blur(5px);
-            backdrop-filter: blur(5px);
-        }
-
-        .modal-content {
-            background-color: #fefefe;
-            margin: 40% auto;
-            padding: 25px;
-            border: 1px solid #888;
-            width: 80%;
-            max-width: 400px;
-            border-radius: var(--border-radius);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            text-align: center;
-            animation: fadeIn 0.3s;
-        }
-        
-        @keyframes fadeIn {
-          from {opacity: 0; transform: scale(0.9);}
-          to {opacity: 1; transform: scale(1);}
-        }
-
-        .close-btn {
-            color: #aaa;
-            float: left;
-            font-size: 28px;
-            font-weight: bold;
-            line-height: 1;
-        }
-
-        .close-btn:hover,
-        .close-btn:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-        
-        .modal-content p {
-            font-size: 1.2rem;
-            margin: 20px 0;
+        a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-
-    <div class="container">
-        <div id="login-container">
-            <h2>כניסה למערכת</h2>
-            <form id="password-form">
-                <label for="password-input">אנא הזן סיסמה:</label>
-                <input type="password" id="password-input" required>
-                <p id="error-message">סיסמה שגויה, נסה שוב.</p>
-                <button type="submit" id="submit-btn">כניסה</button>
-            </form>
-        </div>
-
-        <div id="main-content">
-            <img src="logo.png" alt="לוגו" class="logo">
-            <h1>גדוד 1895, אימון אג"ם, אוקטובר 2025</h1>
-            <ul class="links-list">
-                <li><a href="https://script.google.com/macros/s/AKfycbxP011m1RCnedYLQTX_EuFlNzst8vYuPZz8l6nBtzTU547Dc7YuJooz7I_hqHIK-9K_SA/exec?page=checkin">קליטת מתייצבים</a></li>
-                <li><a href="https://script.google.com/macros/s/AKfycbxP011m1RCnedYLQTX_EuFlNzst8vYuPZz8l6nBtzTU547Dc7YuJooz7I_hqHIK-9K_SA/exec?page=stats" target="_blank" rel="noopener noreferrer">צפי התייצבות לאימון</a></li>
-                <li><a id="adjutant-calls-link" href="https://script.google.com/macros/s/AKfycbxP011m1RCnedYLQTX_EuFlNzst8vYuPZz8l6nBtzTU547Dc7YuJooz7I_hqHIK-9K_SA/exec" target="_blank" rel="noopener noreferrer">שיחות שלישות ממתינות (...)</a></li>
-                <li><a id="commander-calls-link" href="https://script.google.com/macros/s/AKfycbxP011m1RCnedYLQTX_EuFlNzst8vYuPZz8l6nBtzTU547Dc7YuJooz7I_hqHIK-9K_SA/exec?page=commander" target="_blank" rel="noopener noreferrer">שיחות מפקד ממתינות (...)</a></li>
-                <li><a href="https://script.google.com/macros/s/AKfycbxP011m1RCnedYLQTX_EuFlNzst8vYuPZz8l6nBtzTU547Dc7YuJooz7I_hqHIK-9K_SA/exec?page=logistics" target="_blank" rel="noopener noreferrer">ציוד שחסר לחיילים</a></li>
-                <li><a href="https://script.google.com/macros/s/AKfycbyKZfd-BRduRq0vU8hMJyQgsGvDhIENsWG2YmlWYdZUExo9fNGcZopdtcZ-v6Wat3dZ/exec" target="_blank" rel="noopener noreferrer">ניהול מערכת קארפול</a></li>
-            </ul>
-        </div>
-    </div>
-    
-    <div id="myModal" class="modal">
-      <div class="modal-content">
-        <span class="close-btn">&times;</span>
-        <p>האימון טרם החל</p>
-      </div>
-    </div>
-
-
-    <script>
-        // הכתובת הנכונה של פרויקט ה-Apps Script שלך
-        const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxP011m1RCnedYLQTX_EuFlNzst8vYuPZz8l6nBtzTU547Dc7YuJooz7I_hqHIK-9K_SA/exec';
-        
-        const SCRIPT_URL_WITH_PARAMS = WEB_APP_URL + '?page=counts';
-
-        // --- Function to fetch and update the counts ---
-        async function updateCallCounts() {
-            try {
-                const response = await fetch(SCRIPT_URL_WITH_PARAMS);
-                if (!response.ok) throw new Error('Network response was not ok');
-                
-                const data = await response.json();
-                if (data.error) throw new Error(data.error);
-
-                const adjutantLink = document.getElementById('adjutant-calls-link');
-                const commanderLink = document.getElementById('commander-calls-link');
-
-                if (adjutantLink && data.adjutantCalls !== undefined) {
-                    adjutantLink.textContent = `שיחות שלישות ממתינות (${data.adjutantCalls})`;
-                }
-                if (commanderLink && data.commanderCalls !== undefined) {
-                    commanderLink.textContent = `שיחות מפקד ממתינות (${data.commanderCalls})`;
-                }
-
-            } catch (error) {
-                console.error('Failed to fetch counts:', error);
-                document.getElementById('adjutant-calls-link').textContent = 'שיחות שלישות (שגיאה)';
-                document.getElementById('commander-calls-link').textContent = 'שיחות מפקד (שגיאה)';
-            }
-        }
-
-        // --- Password Logic ---
-        document.getElementById('password-form').addEventListener('submit', function(event) {
-            event.preventDefault(); 
-            
-            const password = document.getElementById('password-input').value;
-            const correctPassword = 'Agam1895';
-            const loginContainer = document.getElementById('login-container');
-            const mainContent = document.getElementById('main-content');
-            const errorMessage = document.getElementById('error-message');
-
-            if (password === correctPassword) {
-                loginContainer.style.display = 'none';
-                mainContent.style.display = 'block';
-                // Call the function to get the counts AFTER the user logs in
-                updateCallCounts();
-            } else {
-                errorMessage.style.display = 'block';
-                document.getElementById('password-input').value = '';
-            }
-        });
-        
-        // --- Modal (Popup) Logic ---
-        var modal = document.getElementById("myModal");
-        var btn = document.getElementById("show-popup-btn");
-        var span = document.getElementsByClassName("close-btn")[0];
-
-        btn.onclick = function() { modal.style.display = "block"; }
-        span.onclick = function() { modal.style.display = "none"; }
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    </script>
-
+    <p>מעביר אותך למערכת ניהול האימון...</p>
+    <p>
+        <a href="https://script.google.com/macros/s/AKfycbxP011m1RCnedYLQTX_EuFlNzst8vYuPZz8l6nBtzTU547Dc7YuJooz7I_hqHIK-9K_SA/exec">
+            לחץ כאן אם המעבר לא התבצע אוטומטית
+        </a>
+    </p>
 </body>
 </html>
