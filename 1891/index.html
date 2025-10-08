@@ -1,15 +1,131 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="refresh" content="0; url=https://script.google.com/macros/s/AKfycbyL8_eGEs1t_EW9pw6MuvRsWihKCdxN5FF3KyXPRfrQK5BLFOwZmqhwxaP7C_nxZDLI/exec" />
-    <title>Redirecting...</title>
-  </head>
-  <body>
-    <p>מעביר אותך למערכת יעלה, גדוד 1891, ניהול אימון אג"ם</p>
-    <p>
-      If you are not redirected automatically,
-      <a href="https://script.google.com/macros/s/AKfycbyL8_eGEs1t_EW9pw6MuvRsWihKCdxN5FF3KyXPRfrQK5BLFOwZmqhwxaP7C_nxZDLI/exec">click here</a>.
-    </p>
-  </body>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מערכת יעלה - בחירת מערכת</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap');
+        
+        :root {
+            /* צבעים מהעיצוב המקורי */
+            --primary-color: #ba8444;
+            --secondary-color: #905229;
+            --button-hover: #905229;
+            --background-color: #a7c1c0;
+            --font-color: #521002;
+            --container-bg: #ffffff;
+            --shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+
+        body {
+            font-family: 'Rubik', sans-serif;
+            background-color: var(--background-color);
+            color: var(--font-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background-color: var(--container-bg);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 30px 40px;
+            text-align: center;
+        }
+
+        .header {
+            margin-bottom: 35px;
+        }
+
+        .header img {
+            max-width: 70px;
+            margin-bottom: 10px;
+        }
+        
+        .header h1 {
+            font-size: 2.2em;
+            margin: 0;
+            font-weight: 700;
+            color: var(--font-color);
+        }
+
+        .main-actions {
+            display: flex;
+            flex-direction: column; /* Stacks on mobile by default */
+            gap: 15px;
+            margin-bottom: 25px; /* הקטנת הרווח */
+        }
+
+        @media (min-width: 600px) {
+            .main-actions {
+                flex-direction: row; /* Side-by-side on desktop */
+            }
+        }
+
+        .main-actions a {
+            flex: 1; 
+            text-decoration: none;
+            color: white;
+            background-color: var(--primary-color);
+            padding: 18px 20px;
+            border-radius: 8px;
+            font-size: 1.2em;
+            font-weight: 500;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .main-actions a:hover {
+            background-color: var(--button-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        .secondary-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px; 
+            flex-wrap: wrap; 
+        }
+        
+        .secondary-links a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-size: 0.9em;
+            padding-bottom: 2px;
+            border-bottom: 1px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .secondary-links a:hover {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="https://lh3.googleusercontent.com/d/17UjU-dw9sPXYN5N9XVvnezaEnbzk__kW" alt="לוגו">
+            <h1>מערכת יעלה</h1>
+        </div>
+
+        <div class="main-actions">
+            <a href="https://script.google.com/macros/s/AKfycbyL8_eGEs1t_EW9pw6MuvRsWihKCdxN5FF3KyXPRfrQK5BLFOwZmqhwxaP7C_nxZDLI/exec" target="_blank">אימון אג"ם</a>
+            <a href="https://script.google.com/macros/s/AKfycbxRJlJQ2SyoUmKx2Q_zzD0IadmQ1BXGy4l1wH1C4Ij6PwbtQNio8K1qpcnlEqTmlRzYbg/exec" target="_blank">אימון השלמה</a>
+        </div>
+
+        <div class="secondary-links">
+            <a href="https://docs.google.com/spreadsheets/d/1lliJClWKFROiPiM7wdLiSJOB3HKeYW4cgVDIWqqN3ao/edit?usp=sharing" target="_blank">גיליון נתונים (אג"ם)</a>
+            <a href="https://docs.google.com/spreadsheets/d/1h8Xhl2yqhddKeuvVfc5Ob4tOKDA8I4J5pBmiF8NcFg0/edit?usp=sharing" target="_blank">גיליון נתונים (השלמה)</a>
+        </div>
+    </div>
+</body>
 </html>
