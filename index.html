@@ -2,7 +2,7 @@
 <html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale-1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>מערכת יעלה</title>
     <style>
         /* --- עיצוב כללי בסגנון צבאי --- */
@@ -34,6 +34,31 @@
         h1 {
             color: #556B2F;
             font-weight: bold;
+        }
+
+        /* --- מיכל כפתורים --- */
+        .buttons-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .action-button {
+            background-color: #556B2F; /* צבע ירוק כמו הכותרת */
+            color: white;
+            border: none;
+            /* --- השינוי בוצע כאן --- */
+            padding: 8px 16px; /* ריווח פנימי קטן יותר */
+            font-size: 0.9em;   /* גופן קטן יותר */
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .action-button:hover {
+            background-color: #6B8E23; /* צבע ירוק מעט בהיר יותר במעבר עכבר */
         }
 
         /* --- מיכל הלוגואים --- */
@@ -69,7 +94,6 @@
             object-fit: contain;
             display: block;
             border-radius: 10px;
-            /* border: 1px solid #E0E0E0; --- השורה הזאת הוסרה --- */
             margin-bottom: 8px;
         }
 
@@ -96,12 +120,77 @@
         .footer-text a:hover {
             border-bottom: 2px solid #28a745;
         }
+
+        /* --- עיצוב חלונית ההתחברות (Modal) --- */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1; 
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            border-radius: 5px;
+            text-align: right;
+        }
+
+        .close-button {
+            color: #aaa;
+            float: left;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        .login-form input {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .login-form button {
+            width: 100%;
+            padding: 12px;
+            background-color: #556B2F;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
     </style>
 </head>
 <body>
 
     <div class="main-container">
         <h1>מערכת יעלה</h1>
+
+        <div class="buttons-container">
+            <button class="action-button" onclick="openLoginPopup()">דשבורד קמש"חית</button>
+            <button class="action-button" onclick="openLoginPopup()">קורסים</button>
+            <button class="action-button" onclick="openLoginPopup()">גאנטים</button>
+        </div>
 
         <div class="logo-container">
             <a href="http://yae.la/1891" target="_blank" class="logo-item">
@@ -134,10 +223,51 @@
         </p>
     </div>
 
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeLoginPopup()">&times;</span>
+            <h2>כניסה למערכת</h2>
+            <form id="loginForm" class="login-form">
+                <label for="username">שם משתמש:</label>
+                <input type="text" id="username" name="username" required>
+                <label for="password">סיסמה:</label>
+                <input type="password" id="password" name="password" required>
+                <button type="submit">התחבר</button>
+            </form>
+        </div>
+    </div>
+
     <script>
-        // פונקציה שמציגה את הפופ-אפ
+        // פונקציה שמציגה פופ-אפ כללי
         function showPopup() {
             alert("המערכת אינה זמינה");
+        }
+
+        // קבלת הרכיבים של חלונית ההתחברות
+        const modal = document.getElementById('loginModal');
+        const loginForm = document.getElementById('loginForm');
+
+        // פונקציה לפתיחת חלונית ההתחברות
+        function openLoginPopup() {
+            modal.style.display = 'block';
+        }
+
+        // פונקציה לסגירת חלונית ההתחברות
+        function closeLoginPopup() {
+            modal.style.display = 'none';
+        }
+
+        // סגירת החלונית בלחיצה מחוץ לתוכן שלה
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeLoginPopup();
+            }
+        }
+
+        // טיפול באירוע שליחת הטופס
+        loginForm.onsubmit = function(event) {
+            event.preventDefault(); // מניעת שליחה רגילה של הטופס
+            alert("ססמא שגויה");
         }
     </script>
 
