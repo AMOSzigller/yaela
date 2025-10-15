@@ -1,227 +1,30 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>מערכת יעלה</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/png" href="logo.png">
-  <meta property="og:image" content="logo.png">
-  <style>
-    :root{
-      --primary-color:#556B2F; /* olive-drab */
-      --secondary-color:#F5F5DC; /* beige */
-      --text-color:#333;
-      --card-bg-color:#FFF;
-      --border-color:#DEE2E6;
-      --font-family:'Rubik',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji",sans-serif;
-    }
-    html,body{height:100%}
-    body{
-      margin:0;
-      background:var(--secondary-color);
-      color:var(--text-color);
-      font-family:var(--font-family);
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      display:grid;
-      place-items:start center;
-      padding:24px;
-    }
-    .wrap{width:100%;max-width:980px}
-    header{text-align:center;margin-bottom:28px}
-    .brand{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}
-    .brand img{width:56px;height:56px;object-fit:contain;border-radius:10px;border:1px solid var(--border-color);background:#fff;padding:6px;box-shadow:0 1px 0 rgba(0,0,0,.04)}
-    .brand h1{margin:0;color:var(--primary-color);font-weight:700;font-size:clamp(1.6rem,2.4vw,2.2rem)}
-    .brand-sub{margin:8px 0 0;opacity:.8;text-align:center}
-
-    /* groups */
-    .group{margin-bottom:26px}
-    .group h2{
-      margin:0 0 10px 0;
-      font-size:1.15rem;
-      color:#1f2b10;
-      background:rgba(85,107,47,.10);
-      border:1px solid rgba(85,107,47,.25);
-      padding:10px 14px;
-      border-radius:12px;
-    }
-
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
-      gap:18px;
-    }
-    a.link-card, .link-card-action{
-      position:relative;
-      display:block;
-      padding:18px 20px;
-      background:var(--card-bg-color);
-      color:var(--text-color);
-      text-decoration:none;
-      border:1px solid var(--border-color);
-      border-radius:14px;
-      box-shadow:0 1px 0 rgba(0,0,0,.03);
-      transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
-      outline:none;
-      cursor: pointer;
-    }
-    a.link-card::before, .link-card-action::before{
-      content:"";
-      position:absolute;
-      inset-inline-start:0; top:0; bottom:0;
-      width:6px;
-      border-top-left-radius:14px;
-      border-bottom-left-radius:14px;
-      background:var(--primary-color);
-      opacity:.9;
-    }
-    a.link-card:hover, a.link-card:focus-visible, .link-card-action:hover, .link-card-action:focus-visible{
-      transform:translateY(-2px);
-      border-color:rgba(85,107,47,.45);
-      box-shadow:0 6px 18px rgba(0,0,0,.08);
-    }
-    .title{font-weight:700;font-size:1.05rem;color:var(--primary-color)}
-    .desc{margin-top:6px;font-size:.95rem;opacity:.85}
-    .launch{
-      margin-top:14px; display:inline-flex; align-items:center; gap:.5ch;
-      padding:10px 14px; background:var(--primary-color); color:#fff;
-      border:1px solid var(--primary-color); border-radius:999px; font-weight:700; text-decoration:none;
-      transition:filter .15s ease;
-    }
-    .launch:hover{filter:brightness(1.08)}
-    .launch:focus-visible{outline:3px solid rgba(85,107,47,.35); outline-offset:2px}
-
-    footer{margin-top:28px;text-align:center;font-size:.9rem;opacity:.75}
+    <meta charset="UTF-8">
     
-    /* Custom Popup */
-    .popup-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.6);
-        backdrop-filter: blur(4px);
-        display: none;
-        justify-content: center;
-        align-items: center;
-        z-index: 1000;
-    }
-    .popup-content {
-        background: #fff;
-        padding: 24px;
-        border-radius: 16px;
-        text-align: center;
-        max-width: 320px;
-        width: 90%;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    }
-    .popup-content p { margin: 0 0 16px; }
-    .popup-content a { color: var(--primary-color); font-weight: 700; }
-    .popup-close {
-        padding: 8px 16px;
-        border-radius: 999px;
-        border: 1px solid #ccc;
-        background: #eee;
-        cursor: pointer;
-        margin-top: 10px;
-    }
-
-  </style>
-</head>
-
-<body>
-  <main class="wrap" role="main">
-    <header>
-      <div class="brand" role="banner">
-        <img src="logo.png" alt="לוגו" onerror="this.style.display='none'">
-        <h1>מערכת יעלה</h1>
-      </div>
-      <p class="brand-sub">גדוד 1893</p>
-    </header>
-
-    <section class="group" aria-label="יום ראיונות">
-      <h2>יום ראיונות ספטמבר 2025</h2>
-      <div class="grid">
-        <a class="link-card" href="https://yae.la/1893/interview" target="_blank" rel="noopener noreferrer">
-          <div class="title">כניסה למערכת</div>
-          <span class="launch" aria-hidden="true">פתח ▸</span>
-        </a>
-      </div>
-    </section>
-
-    <section class="group" aria-label="מערכת הסעות">
-      <h2>מערכת הסעות גדודית</h2>
-      <div class="grid">
-        <a class="link-card" href="http://yae.la/1893/carpool" target="_blank" rel="noopener noreferrer">
-          <div class="title">כניסה למערכת</div>
-          <span class="launch" aria-hidden="true">פתח ▸</span>
-        </a>
-        <a class="link-card" href="http://yae.la/1893/carpool/admin" target="_blank" rel="noopener noreferrer">
-          <div class="title">מסך מפקד</div>
-          <span class="launch" aria-hidden="true">פתח ▸</span>
-        </a>
-      </div>
-    </section>
-
-    <section class="group" aria-label="ניהול">
-      <h2>מערכות ניהול לא פעילות</h2>
-      <div class="grid">
-        <div class="link-card-action" onclick="showPopup('battalion')">
-          <div class="title">מערכת לניהול גדוד</div>
-          <div class="desc">לחץ לפתיחת בקשה</div>
-        </div>
-        <div class="link-card-action" onclick="showPopup('training')">
-          <div class="title">מערכת לניהול אימון</div>
-          <div class="desc">לחץ לפתיחת בקשה</div>
-        </div>
-      </div>
-    </section>
-
-    <footer>לשאלות או בעיות פנו אל שלישות גדוד 1893</footer>
-  </main>
-  
-  <div class="popup-overlay" id="popup-overlay">
-      <div class="popup-content">
-          <p id="popup-message"></p>
-          <button class="popup-close" onclick="hidePopup()">סגור</button>
-      </div>
-  </div>
-
-  <script>
-    function showPopup(type) {
-      const overlay = document.getElementById('popup-overlay');
-      const messageEl = document.getElementById('popup-message');
-      let message = '';
-      let number = '972523661999';
-      let waMessage = '';
-
-      if (type === 'battalion') {
-        waMessage = encodeURIComponent('היי בר, גדוד 1893 מבקש גישה למערכת לניהול גדוד, איך עושים את זה?');
-        message = `אין מערכת פעילה. לפתיחת מערכת יש <a href="https://wa.me/${number}?text=${waMessage}" target="_blank">ללחוץ כאן</a>.`;
-      } else if (type === 'training') {
-        waMessage = encodeURIComponent('היי בר, גדוד 1893 מבקש גישה למערכת לניהול אימון, איך עושים את זה?');
-        message = `אין מערכת פעילה. לפתיחת מערכת יש <a href="https://wa.me/${number}?text=${waMessage}" target="_blank">ללחוץ כאן</a>.`;
-      }
-      
-      messageEl.innerHTML = message;
-      overlay.style.display = 'flex';
-    }
-
-    function hidePopup() {
-      const overlay = document.getElementById('popup-overlay');
-      overlay.style.display = 'none';
-    }
+    <meta http-equiv="refresh" content="0; url=https://script.google.com/macros/s/AKfycbzF7akrp6OJe8vMeShxZURYMyBz140OZoBrKtZiFpP5qQ75IdDh4BBjjNaoP9YLYFxD/exec">
     
-    // Close popup if clicked outside the content area
-    document.getElementById('popup-overlay').addEventListener('click', function(event) {
-        if (event.target === this) {
-            hidePopup();
+    <title>מעבר אוטומטי...</title>
+    
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            text-align: center; 
+            padding-top: 50px; 
+            background-color: #f0f0f0; 
         }
-    });
-  </script>
+        a { 
+            color: #007bff; 
+        }
+    </style>
+</head>
+<body>
+    <p>...מעביר אותך</p>
+    <p>
+        <a href="https://script.google.com/macros/s/AKfycbzF7akrp6OJe8vMeShxZURYMyBz140OZoBrKtZiFpP5qQ75IdDh4BBjjNaoP9YLYFxD/exec">
+            אם המעבר לא מתבצע אוטומטית, לחץ כאן
+        </a>
+    </p>
 </body>
 </html>
