@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    
+    <meta http-equiv="refresh" content="0; url=https://script.google.com/macros/s/AKfycbwwmzdI3bfkM4T6vL7BWG5up5SIYHM_gvAZRbQk6u0ZKAqV7Hiq0qBylA7FMFLDDGOD/exec">
+    
+    <title>יצירת קשר עם מפקד</title>
+    
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            text-align: center; 
+            padding-top: 50px; 
+            background-color: #f0f0f0; 
+        }
+        a { 
+            color: #007bff; 
+        }
+    </style>
+</head>
+<body>
+    <p>..מעביר אותך</p>
+    <p>
+        <a href="https://script.google.com/macros/s/AKfycbwwmzdI3bfkM4T6vL7BWG5up5SIYHM_gvAZRbQk6u0ZKAqV7Hiq0qBylA7FMFLDDGOD/exec">
+            אם המעבר לא מתבצע אוטומטית, לחץ כאן
+        </a>
+    </p>
+</body>
+</html>
