@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    
+    <meta http-equiv="refresh" content="0; url=https://script.google.com/macros/s/AKfycbx9D_8ZKwKkRgBL-xZ8VmEU4ar59yh8ZS7Vgmuw7LfanUC6lSpXkEJPCIke1cE-b86k/exec?page=interviewer">
+    
+    <title>מערכת יעלה לראיונות</title>
+    
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            text-align: center; 
+            padding-top: 50px; 
+            background-color: #f0f0f0; 
+        }
+        a { 
+            color: #007bff; 
+        }
+    </style>
+</head>
+<body>
+    <p>...מעביר אותך</p>
+    <p>
+        <a href="https://script.google.com/macros/s/AKfycbx9D_8ZKwKkRgBL-xZ8VmEU4ar59yh8ZS7Vgmuw7LfanUC6lSpXkEJPCIke1cE-b86k/exec?page=interviewer">
+            אם המעבר לא מתבצע אוטומטית, לחץ כאן
+        </a>
+    </p>
+</body>
+</html>
