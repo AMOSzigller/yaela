@@ -2,275 +2,29 @@
 <html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>מערכת יעלה</title>
+    
+    <meta http-equiv="refresh" content="0; url=https://script.google.com/a/macros/yae.la/s/AKfycbxBbTOy3Dmq84dVMSSbgz1SzhYsGQWK-to7ILiHWlaLsUipjec0TBepw4LgdtpR6P8_/exec">
+    
+    <title>יעלה 1895</title>
+    
     <style>
-        /* --- עיצוב כללי בסגנון צבאי --- */
-        body {
-            font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-            background-color: #EAE7DC;
-            color: #3D403A;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
+        body { 
+            font-family: Arial, sans-serif; 
+            text-align: center; 
+            padding-top: 50px; 
+            background-color: #f0f0f0; 
         }
-
-        /* --- קונטיינר מרכזי --- */
-        .main-container {
-            background-color: #FCFBF4;
-            border: 1px solid #C3C3C3;
-            border-radius: 4px;
-            padding: 20px 40px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            max-width: 800px;
-            width: 100%;
-            text-align: center;
+        a { 
+            color: #007bff; 
         }
-        
-        /* --- כותרת ראשית --- */
-        h1 {
-            color: #556B2F;
-            font-weight: bold;
-        }
-
-        /* --- מיכל כפתורים --- */
-        .buttons-container {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin: 20px 0;
-        }
-
-        .action-button {
-            background-color: #556B2F; /* צבע ירוק כמו הכותרת */
-            color: white;
-            border: none;
-            /* --- השינוי בוצע כאן --- */
-            padding: 8px 16px; /* ריווח פנימי קטן יותר */
-            font-size: 0.9em;   /* גופן קטן יותר */
-            font-weight: bold;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-
-        .action-button:hover {
-            background-color: #6B8E23; /* צבע ירוק מעט בהיר יותר במעבר עכבר */
-        }
-
-        /* --- מיכל הלוגואים --- */
-        .logo-container {
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            flex-wrap: wrap; 
-            gap: 25px; 
-            padding: 20px 0;
-            margin-bottom: 30px;
-            border-top: 1px solid #DDD;
-            border-bottom: 1px solid #DDD;
-        }
-
-        /* --- עיצוב פריט לוגו בודד (תמונה + טקסט) --- */
-        .logo-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-decoration: none;
-            color: inherit;
-            transition: transform 0.2s ease-in-out;
-        }
-
-        .logo-item:hover {
-            transform: translateY(-5px);
-        }
-        
-        .logo-item img {
-            width: 120px; 
-            height: 120px;
-            object-fit: contain;
-            display: block;
-            border-radius: 10px;
-            margin-bottom: 8px;
-        }
-
-        .logo-item p {
-            margin: 0;
-            font-weight: bold;
-            font-size: 0.9em;
-        }
-        
-        /* --- טקסט תחתון וקישור וואטסאפ --- */
-        .footer-text {
-            font-size: 1.1em;
-            color: #555;
-        }
-        
-        .footer-text a {
-            color: #28a745; 
-            text-decoration: none;
-            font-weight: bold;
-            border-bottom: 2px solid transparent;
-            transition: border-bottom 0.2s;
-        }
-        
-        .footer-text a:hover {
-            border-bottom: 2px solid #28a745;
-        }
-
-        /* --- עיצוב חלונית ההתחברות (Modal) --- */
-        .modal {
-            display: none; 
-            position: fixed; 
-            z-index: 1; 
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.5);
-            padding-top: 60px;
-        }
-
-        .modal-content {
-            background-color: #fefefe;
-            margin: 5% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            max-width: 400px;
-            border-radius: 5px;
-            text-align: right;
-        }
-
-        .close-button {
-            color: #aaa;
-            float: left;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        .close-button:hover,
-        .close-button:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-        
-        .login-form input {
-            width: calc(100% - 22px);
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        .login-form button {
-            width: 100%;
-            padding: 12px;
-            background-color: #556B2F;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1em;
-        }
-
     </style>
 </head>
 <body>
-
-    <div class="main-container">
-        <h1>מערכת יעלה</h1>
-
-        <div class="buttons-container">
-            <button class="action-button" onclick="openLoginPopup()">דשבורד קמש"חית</button>
-            <button class="action-button" onclick="openLoginPopup()">קורסים</button>
-            <button class="action-button" onclick="openLoginPopup()">גאנטים</button>
-        </div>
-
-        <div class="logo-container">
-            <a href="http://yae.la/1891" target="_blank" class="logo-item">
-                <img src="newLogo1891.png" alt="לוגו 1891">
-                <p>גדוד 1891</p>
-            </a>
-            <a href="http://yae.la/1892" target="_blank" class="logo-item">
-                <img src="newnewLogo1892.png" alt="לוגו 1892">
-                <p>גדוד 1892</p>
-            </a>
-            <a href="http://yae.la/1893" target="_blank" class="logo-item">
-                <img src="newLogo1893.png" alt="לוגו 1893">
-                <p>גדוד 1893</p>
-            </a>
-            <a href="http://yae.la/1894" target="_blank" class="logo-item">
-                <img src="yaelagdud1894.png" alt="לוגו 1894">
-                <p>גדוד 1894</p>
-            </a>
-            <a href="http://yae.la/1895" target="_blank" class="logo-item">
-                <img src="newLogo1895.png" alt="לוגו 1895">
-                <p>גדוד 1895</p>
-            </a>
-        </div>
-
-        <p class="footer-text">
-            רוצים גם? 
-            <a href="http://yae.la/demo" target="_blank">
-                לקביעת דמו לחצו כאן
-            </a>
-        </p>
-    </div>
-
-    <div id="loginModal" class="modal">
-        <div class="modal-content">
-            <span class="close-button" onclick="closeLoginPopup()">&times;</span>
-            <h2>כניסה למערכת</h2>
-            <form id="loginForm" class="login-form">
-                <label for="username">שם משתמש:</label>
-                <input type="text" id="username" name="username" required>
-                <label for="password">סיסמה:</label>
-                <input type="password" id="password" name="password" required>
-                <button type="submit">התחבר</button>
-            </form>
-        </div>
-    </div>
-
-    <script>
-        // פונקציה שמציגה פופ-אפ כללי
-        function showPopup() {
-            alert("המערכת אינה זמינה");
-        }
-
-        // קבלת הרכיבים של חלונית ההתחברות
-        const modal = document.getElementById('loginModal');
-        const loginForm = document.getElementById('loginForm');
-
-        // פונקציה לפתיחת חלונית ההתחברות
-        function openLoginPopup() {
-            modal.style.display = 'block';
-        }
-
-        // פונקציה לסגירת חלונית ההתחברות
-        function closeLoginPopup() {
-            modal.style.display = 'none';
-        }
-
-        // סגירת החלונית בלחיצה מחוץ לתוכן שלה
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                closeLoginPopup();
-            }
-        }
-
-        // טיפול באירוע שליחת הטופס
-        loginForm.onsubmit = function(event) {
-            event.preventDefault(); // מניעת שליחה רגילה של הטופס
-            alert("ססמא שגויה");
-        }
-    </script>
-
+    <p>...מעביר אותך</p>
+    <p>
+        <a href="https://script.google.com/a/macros/yae.la/s/AKfycbxBbTOy3Dmq84dVMSSbgz1SzhYsGQWK-to7ILiHWlaLsUipjec0TBepw4LgdtpR6P8_/exec">
+            אם המעבר לא מתבצע אוטומטית, לחץ כאן
+        </a>
+    </p>
 </body>
 </html>
-
